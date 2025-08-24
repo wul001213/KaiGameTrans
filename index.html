@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -6,237 +7,686 @@
     <meta name="google-site-verification" content="d1QlN-HFEtIDeqgHanrQDDQ-6f9LPKJhoWYOSI38jjE" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KGT翻译软件介绍及注意事项</title>
+    <meta name="keywords" content="KGT, Kai GameTrans, 游戏翻译软件, AI游戏翻译, 免费翻译工具, Renpy翻译, Unity翻译, RPGMaker翻译, 游戏汉化, B站凯凯76579, 硅基流动, OpenRouter, 无问芯穹, Ollama, 游戏本地化, PC游戏翻译, 手机游戏翻译, 翻译脚本, AI翻译器, 游戏mod工具, 汉化工具, 免费AI翻译, 游戏文本翻译, 多语言支持, 跨平台翻译, RPGMaker MV翻译, RPGMaker MZ翻译, Unity游戏汉化, Renpy游戏汉化">
+    <meta name="description" content="Kai GameTrans (KGT) 是由B站凯凯76579开发的免费AI游戏翻译软件，支持Renpy、Unity、RPGMaker(MV/MZ)等引擎游戏的翻译。提供电脑版和手机版完整解决方案，集成硅基流动、OpenRouter、无问芯穹等多种AI翻译接口，包含详细教程视频，让游戏汉化更简单高效。">
+    <meta name="author" content="凯凯76579">
+    <meta name="copyright" content="Kai GameTrans (KGT)">
+    <meta property="og:title" content="KGT翻译软件介绍 - 免费AI游戏翻译工具">
+    <meta property="og:description" content="Kai GameTrans (KGT) 是由B站凯凯76579开发的免费AI游戏翻译软件，支持多种游戏引擎的翻译。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-website-url.com">
+    <meta property="og:image" content="https://your-website-url.com/images/kgt-preview.jpg">
+    <title>KGT翻译软件介绍及注意事项 - 免费AI游戏翻译工具 | 支持Renpy Unity RPGMaker</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #4361ee;
+            --primary-light: #566ce0;
+            --primary-dark: #3a0ca3;
+            --primary-gradient: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
             --secondary-color: #3a0ca3;
             --accent-color: #7209b7;
             --light-color: #f8f9fa;
             --dark-color: #212529;
             --success-color: #4cc9f0;
             --warning-color: #f72585;
-            --border-radius: 12px;
-            --box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
+            --border-radius: 16px;
+            --card-radius: 20px;
+            --box-shadow: 0 12px 30px rgba(67, 97, 238, 0.15);
+            --box-shadow-hover: 0 20px 40px rgba(67, 97, 238, 0.25);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --transition-fast: all 0.2s ease;
+            --transition-slow: all 0.6s ease;
+            --section-spacing: 60px;
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            font-family: 'Noto Sans SC', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
             color: var(--dark-color);
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             padding: 20px;
             min-height: 100vh;
+            background-attachment: fixed;
+            overflow-x: hidden;
         }
-
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
         }
-
         header {
             text-align: center;
-            margin-bottom: 40px;
-            padding: 30px;
+            margin-bottom: var(--section-spacing);
+            padding: 50px 40px;
             background: white;
-            border-radius: var(--border-radius);
+            border-radius: var(--card-radius);
             box-shadow: var(--box-shadow);
-            animation: fadeIn 1s ease;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(67, 97, 238, 0.1);
         }
-
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 1.5s ease;
+        }
+        header:hover::before {
+            transform: scaleX(1);
+        }
         h1 {
             color: var(--primary-color);
             margin-bottom: 15px;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-
-        h2 {
-            color: var(--secondary-color);
-            margin: 30px 0 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--primary-color);
-            font-size: 1.8rem;
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.8s ease;
         }
-
-        h3 {
-            color: var(--accent-color);
-            margin: 20px 0 15px;
-            font-size: 1.4rem;
+        h1:hover::after {
+            transform: scaleX(1);
         }
-
+        h1 i {
+            margin-right: 15px;
+            animation: pulse 2s infinite;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
         .last-update {
             color: #6c757d;
             font-style: italic;
-            margin-top: 10px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            opacity: 0.8;
+            transition: var(--transition-fast);
         }
-
+        .last-update:hover {
+            opacity: 1;
+        }
+        h2 {
+            color: var(--secondary-color);
+            margin: var(--section-spacing) 0 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid transparent;
+            border-image: var(--primary-gradient);
+            border-image-slice: 1;
+            font-size: 2rem;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+        h2::before {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--primary-color);
+            transition: width 0.6s ease;
+        }
+        h2:hover::before {
+            width: 100%;
+        }
+        h3 {
+            color: var(--accent-color);
+            margin: 25px 0 20px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        h3 i {
+            margin-right: 12px;
+            transition: var(--transition-fast);
+        }
+        h3:hover i {
+            transform: scale(1.2);
+        }
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: var(--section-spacing);
         }
-
         .card {
             background: white;
-            border-radius: var(--border-radius);
+            border-radius: var(--card-radius);
             box-shadow: var(--box-shadow);
-            padding: 25px;
+            padding: 30px;
             transition: var(--transition);
             height: 100%;
             display: flex;
             flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            transform: translateY(0);
+            border: 1px solid rgba(67, 97, 238, 0.1);
         }
-
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: transparent;
+            transition: var(--transition);
+        }
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-8px);
+            box-shadow: var(--box-shadow-hover);
         }
-
+        .card:hover::before {
+            background: var(--primary-gradient);
+        }
         .card-title {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: var(--primary-color);
+            font-weight: 600;
+            position: relative;
         }
-
-        .card-title i {
-            margin-right: 12px;
-            font-size: 1.5rem;
-        }
-
-        ul, ol {
-            padding-left: 20px;
-            margin-bottom: 20px;
-        }
-
-        li {
-            margin-bottom: 12px;
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-color);
+            opacity: 0.3;
             transition: var(--transition);
         }
-
+        .card-title:hover::after {
+            width: 70px;
+            opacity: 0.6;
+        }
+        .card-title i {
+            margin-right: 14px;
+            font-size: 1.6rem;
+            transition: var(--transition);
+        }
+        .card-title:hover i {
+            transform: rotate(10deg) scale(1.1);
+        }
+        ul, ol {
+            padding-left: 25px;
+            margin-bottom: 22px;
+            position: relative;
+        }
+        ul::before, ol::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(67, 97, 238, 0.1);
+            border-radius: 2px;
+        }
+        li {
+            margin-bottom: 15px;
+            transition: var(--transition-fast);
+            position: relative;
+            padding-left: 10px;
+        }
+        li::before {
+            content: '•';
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            left: -12px;
+            transition: var(--transition-fast);
+        }
         li:hover {
             color: var(--secondary-color);
+            transform: translateX(5px);
         }
-
+        li:hover::before {
+            color: var(--accent-color);
+            transform: scale(1.2);
+        }
+        ol li {
+            list-style: none;
+            position: relative;
+        }
+        ol li::before {
+            content: counter(list-item, decimal) '.';
+            color: var(--primary-color);
+            background: rgba(67, 97, 238, 0.1);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            left: -30px;
+            top: 3px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        ol li.recommended::before {
+            background: var(--success-color);
+            color: white;
+            box-shadow: 0 2px 6px rgba(76, 201, 240, 0.3);
+        }
+        ol li.recommended::after {
+            content: ' (推荐)';
+            color: var(--success-color);
+            font-size: 0.9em;
+            font-weight: 500;
+            margin-left: 8px;
+        }
         a {
             color: var(--primary-color);
             text-decoration: none;
             transition: var(--transition);
             font-weight: 500;
+            position: relative;
+            padding-bottom: 2px;
         }
-
+        a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
         a:hover {
             color: var(--accent-color);
-            text-decoration: underline;
         }
-
+        a:hover::after {
+            width: 100%;
+        }
+        code {
+            background: rgba(67, 97, 238, 0.1);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #d62976;
+            border: 1px solid rgba(67, 97, 238, 0.2);
+            transition: var(--transition-fast);
+        }
+        code:hover {
+            background: rgba(67, 97, 238, 0.2);
+            transform: scale(1.05);
+        }
         .note {
-            background-color: #f8f9fa;
-            border-left: 4px solid var(--primary-color);
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 4px;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e6eaff 100%);
+            border-left: 5px solid var(--primary-color);
+            padding: 18px;
+            margin: 25px 0;
+            border-radius: 0 10px 10px 0;
+            border: 1px solid rgba(67, 97, 238, 0.15);
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.08);
+            transition: var(--transition);
         }
-
+        .note strong {
+            color: var(--primary-color);
+        }
         .warning {
-            background-color: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 4px;
+            background: linear-gradient(135deg, #fff9ed 0%, #fff3cd 100%);
+            border-left: 5px solid #ffc107;
+            padding: 18px;
+            margin: 25px 0;
+            border-radius: 0 10px 10px 0;
+            border: 1px solid rgba(255, 193, 7, 0.2);
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.1);
+            transition: var(--transition);
         }
-
+        .warning strong {
+            color: #d39e00;
+        }
         .video-links {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
-            margin: 15px 0;
+            gap: 18px;
+            margin: 20px 0;
+            padding: 10px 0;
         }
-
         .video-link {
             display: inline-flex;
             align-items: center;
-            background: var(--light-color);
-            padding: 8px 15px;
-            border-radius: 30px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 35px;
             transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(67, 97, 238, 0.1);
+            font-weight: 500;
         }
-
         .video-link:hover {
-            background: var(--primary-color);
+            background: var(--primary-gradient);
             color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.2);
         }
-
+        .video-link i {
+            margin-right: 10px;
+            color: #fb7185;
+            transition: var(--transition);
+            font-size: 1.1em;
+        }
         .video-link:hover i {
             color: white;
+            transform: scale(1.2) rotate(10deg);
         }
-
-        .video-link i {
-            margin-right: 8px;
+        .demo-videos {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(67, 97, 238, 0.05);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+        }
+        .demo-videos h4 {
             color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
-
         footer {
             text-align: center;
-            margin-top: 50px;
-            padding: 20px;
+            margin-top: var(--section-spacing);
+            padding: 40px 30px;
             color: #6c757d;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
-
+        footer a {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition-slow);
+        }
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .software-intro {
+            background: white;
+            border-radius: var(--card-radius);
+            box-shadow: var(--box-shadow);
+            padding: 35px;
+            margin-bottom: var(--section-spacing);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(67, 97, 238, 0.1);
+        }
+        .software-intro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 1.2s ease;
+        }
+        .software-intro:hover::before {
+            transform: scaleX(1);
+        }
+        .software-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .software-title i {
+            margin-right: 15px;
+            animation: pulse 2s infinite;
+        }
+        .software-content {
+            line-height: 1.8;
+            color: var(--dark-color);
+            font-size: 1.1rem;
+        }
+        .software-content a {
+            font-weight: 600;
+        }
+        .highlight {
+            background: rgba(67, 97, 238, 0.15);
+            color: var(--primary-light);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+            border: 1px solid rgba(67, 97, 238, 0.2);
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .feature-item {
+            background: rgba(67, 97, 238, 0.1);
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 500;
+            color: var(--primary-color);
+            border: 1px solid rgba(67, 97, 238, 0.2);
+            transition: var(--transition);
+        }
+        .feature-item:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(67, 97, 238, 0.2);
+        }
+        .section-intro {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(67, 97, 238, 0.05);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+        .quick-link {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(67, 97, 238, 0.1);
+        }
+        .quick-link:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.2);
+        }
         @media (max-width: 768px) {
             body {
                 padding: 15px;
             }
-            
             h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
-            
             h2 {
-                font-size: 1.6rem;
+                font-size: 1.7rem;
             }
-            
+            h3 {
+                font-size: 1.5rem;
+            }
+            header {
+                padding: 30px 20px;
+            }
             .card-grid {
                 grid-template-columns: 1fr;
             }
-            
             .video-links {
                 flex-direction: column;
+            }
+            .video-link {
+                margin: 5px 0;
+            }
+            .software-intro {
+                padding: 25px 20px;
+            }
+            .software-title {
+                font-size: 1.6rem;
+            }
+            .software-content {
+                font-size: 1rem;
+            }
+            .section-intro {
+                font-size: 0.95rem;
+                padding: 12px;
+            }
+            .quick-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .card {
+                padding: 25px 20px;
+            }
+            .video-link {
+                padding: 8px 15px;
+            }
+            footer {
+                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
+        <header class="animate-on-scroll">
             <h1><i class="fas fa-language"></i> KGT翻译软件介绍及注意事项</h1>
+            <p class="subtitle">免费AI游戏翻译工具 | 支持Renpy Unity RPGMaker(MV/MZ)引擎</p>
             <p class="last-update">最后一次编辑：2025年8月24日13:55:17</p>
         </header>
 
-        <section>
-            <h2>关于软件下载</h2>
+        <section class="software-intro animate-on-scroll">
+            <div class="software-title">
+                <i class="fas fa-rocket"></i> 软件介绍
+            </div>
+            <div class="software-content">
+                <p><span class="highlight">Kai GameTrans（KGT）</span>是由B站用户<span class="highlight">凯凯76579</span>（<a href="https://space.bilibili.com/667716368" target="_blank">点击查看主页</a>）开发的一款免费AI游戏翻译软件。</p>
+                <p>目前该翻译器支持<span class="highlight">Renpy</span>、<span class="highlight">Unity</span>和<span class="highlight">RPGMaker(MV/MZ)</span>引擎游戏的翻译，为广大游戏爱好者提供了便捷的翻译解决方案。</p>
+                <p>了解更多使用技巧和最新动态，请加入官方Q群获取第一手信息！</p>
+                
+                <div class="feature-grid">
+                    <div class="feature-item"><i class="fas fa-check"></i> 免费使用</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> AI翻译</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> 多引擎支持</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> 跨平台</div>
+                </div>
+
+                <div class="demo-videos">
+                    <h4><i class="fas fa-video"></i> 实际翻译演示视频</h4>
+                    <div class="video-links">
+                        <a href="https://www.bilibili.com/video/BV1ADezzHEU2" target="_blank" class="video-link">
+                            <i class="fab fa-bilibili"></i> RPGMaker MV/MZ翻译演示
+                        </a>
+                        <a href="https://www.bilibili.com/video/BV1r3bSzFEGE" target="_blank" class="video-link">
+                            <i class="fab fa-bilibili"></i> Unity游戏翻译演示
+                        </a>
+                        <a href="https://www.bilibili.com/video/BV1zP7TzyEL7" target="_blank" class="video-link">
+                            <i class="fab fa-bilibili"></i> Renpy游戏翻译演示
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="animate-on-scroll">
+            <h2><i class="fas fa-download"></i> 关于软件下载</h2>
+            <div class="section-intro">
+                获取KGT翻译软件的最新版本和相关资源，请通过官方渠道下载。
+            </div>
             <div class="card-grid">
                 <div class="card">
                     <h3 class="card-title"><i class="fas fa-download"></i> 下载方式</h3>
@@ -252,8 +702,11 @@
             </div>
         </section>
 
-        <section>
-            <h2>关于软件使用及注意事项</h2>
+        <section class="animate-on-scroll">
+            <h2><i class="fas fa-cogs"></i> 关于软件使用及注意事项</h2>
+            <div class="section-intro">
+                详细配置说明和使用提示，帮助您更好地使用KGT翻译软件。
+            </div>
             <div class="card-grid">
                 <div class="card">
                     <h3 class="card-title"><i class="fas fa-desktop"></i> 电脑版配置</h3>
@@ -276,7 +729,7 @@
                         <li><a href="https://cloud.siliconflow.cn/i/DcWwyaIR" target="_blank">硅基流动网址</a></li>
                         <li>软件目前支持5种翻译接口（其实是4种，Edge接口不可用）：
                             <ol>
-                                <li>硅基流动</li>
+                                <li class="recommended">硅基流动</li>
                                 <li>OpenRouter</li>
                                 <li>Edge翻译（不可用）</li>
                                 <li>无问芯穹</li>
@@ -285,7 +738,6 @@
                         </li>
                     </ul>
                 </div>
-
                 <div class="card">
                     <h3 class="card-title"><i class="fas fa-mobile-alt"></i> 手机版配置</h3>
                     <p>手机版的翻译配置见教程视频：</p>
@@ -311,7 +763,6 @@
                         <p>注：手机中renpy的文件前面都会有x-前缀</p>
                     </div>
                 </div>
-
                 <div class="card">
                     <h3 class="card-title"><i class="fas fa-cogs"></i> 使用说明</h3>
                     <ul>
@@ -328,11 +779,14 @@
             </div>
         </section>
 
-        <section>
-            <h2>关于模型</h2>
+        <section class="animate-on-scroll">
+            <h2><i class="fas fa-brain"></i> 关于模型</h2>
+            <div class="section-intro">
+                不同AI翻译接口的特点和使用建议。
+            </div>
             <div class="card-grid">
                 <div class="card">
-                    <h3 class="card-title"><i class="fas fa-brain"></i> 模型接口比较</h3>
+                    <h3 class="card-title"><i class="fas fa-chart-line"></i> 模型接口比较</h3>
                     <ul>
                         <li><a href="https://cloud.siliconflow.cn" target="_blank">硅基流动</a>：该接口最推荐使用，速度可能时快时慢，免费模型调用限制最小</li>
                         <li><a href="https://openrouter.ai" target="_blank">OpenRouter</a>：该接口免费模型较多，但是速度比硅基流动慢，调用限制也算小</li>
@@ -345,8 +799,11 @@
             </div>
         </section>
 
-        <section>
-            <h2>如何区分游戏引擎类型</h2>
+        <section class="animate-on-scroll">
+            <h2><i class="fas fa-search"></i> 如何区分游戏引擎类型</h2>
+            <div class="section-intro">
+                快速识别您的游戏使用的是哪种引擎。
+            </div>
             <div class="card-grid">
                 <div class="card">
                     <h3 class="card-title"><i class="fas fa-laptop"></i> 电脑用户</h3>
@@ -356,7 +813,6 @@
                         <li><strong>MV/MZ</strong>：在游戏目录中有node.dll nw.dll什么的文件，还有www locales等文件夹基本上就可以判断</li>
                     </ul>
                 </div>
-
                 <div class="card">
                     <h3 class="card-title"><i class="fas fa-mobile"></i> 手机用户</h3>
                     <ul>
@@ -366,11 +822,14 @@
             </div>
         </section>
 
-        <section>
-            <h2>关于Renpy翻译问题</h2>
+        <section class="animate-on-scroll">
+            <h2><i class="fas fa-exclamation-triangle"></i> 关于Renpy翻译问题</h2>
+            <div class="section-intro">
+                针对Renpy游戏翻译的常见问题和解决方案。
+            </div>
             <div class="card-grid">
                 <div class="card">
-                    <h3 class="card-title"><i class="fas fa-exclamation-triangle"></i> 常见问题</h3>
+                    <h3 class="card-title"><i class="fas fa-sync-alt"></i> 常见问题</h3>
                     <ul>
                         <li>不管是电脑版还是手机版，翻译小说会有卡顿都是正常现象，这是由于AI翻译延迟导致的</li>
                         <li>电脑版常见错误有字体白框框，游戏文本不翻译等问题</li>
@@ -384,11 +843,14 @@
             </div>
         </section>
 
-        <section>
-            <h2>关于Unity翻译问题</h2>
+        <section class="animate-on-scroll">
+            <h2><i class="fas fa-gamepad"></i> 关于Unity翻译问题</h2>
+            <div class="section-intro">
+                Unity游戏翻译的特殊注意事项。
+            </div>
             <div class="card-grid">
                 <div class="card">
-                    <h3 class="card-title"><i class="fas fa-gamepad"></i> Unity特定问题</h3>
+                    <h3 class="card-title"><i class="fas fa-plug"></i> Unity特定问题</h3>
                     <ul>
                         <li>Unity游戏有非插件注入模式、插件注入模式两种模式</li>
                         <li>如果游戏出现修补以后打开出现黑框框（命令行），但之后很快就退出了，大概率是插件注入模式的BepInEx依赖下载错误</li>
@@ -400,11 +862,14 @@
             </div>
         </section>
 
-        <section>
-            <h2>其他错误</h2>
+        <section class="animate-on-scroll">
+            <h2><i class="fas fa-bug"></i> 其他错误</h2>
+            <div class="section-intro">
+                常见故障排除指南。
+            </div>
             <div class="card-grid">
                 <div class="card">
-                    <h3 class="card-title"><i class="fas fa-bug"></i> 故障排除</h3>
+                    <h3 class="card-title"><i class="fas fa-wrench"></i> 故障排除</h3>
                     <ul>
                         <li>如果程序输出AI返回为空，请查看你配置的APIKEY以及模型是否正确</li>
                         <li>如果输出游戏路径以后翻译器什么也没有输出，大概率是因为你的游戏非Renpy或Unity游戏</li>
@@ -415,11 +880,14 @@
             </div>
         </section>
 
-        <section>
-            <h2>关于错误反馈</h2>
+        <section class="animate-on-scroll">
+            <h2><i class="fas fa-bug"></i> 关于错误反馈</h2>
+            <div class="section-intro">
+                如何有效反馈问题以获得帮助。
+            </div>
             <div class="card-grid">
                 <div class="card">
-                    <h3 class="card-title"><i class="fas fa-bug"></i> 反馈指南</h3>
+                    <h3 class="card-title"><i class="fas fa-comment-dots"></i> 反馈指南</h3>
                     <p>反馈基本要素：截图或视频，详细的错误描述，游戏本体</p>
                     <ul>
                         <li>电脑版如果遇到此文档中没有提到的错误，请尽量详细描述错误，并附带视频或截图，在群里@作者</li>
@@ -432,8 +900,14 @@
             </div>
         </section>
 
-        <footer>
+        <footer class="animate-on-scroll">
             <p>KGT翻译软件 &copy; 2025 | 最后更新: 2025年8月24日</p>
+            <p>开发者：<a href="https://space.bilibili.com/667716368" target="_blank">凯凯76579</a> | Q群：<a href="https://qm.qq.com/q/1048013394" target="_blank">1048013394</a></p>
+            <div class="quick-links">
+                <a href="https://qm.qq.com/q/1048013394" class="quick-link">加入官方Q群</a>
+                <a href="https://space.bilibili.com/667716368" class="quick-link">访问B站主页</a>
+                <a href="#top" class="quick-link">回到顶部</a>
+            </div>
         </footer>
     </div>
 
@@ -442,18 +916,74 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
 
-        // 添加卡片加载动画
+        // 添加滚动动画
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+
+        // 初始检查
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // 为卡片添加延迟动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = 0;
+                    card.style.transform = 'translateY(30px)';
+                    setTimeout(() => {
+                        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                        card.style.opacity = 1;
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
+                }, index * 100);
+            });
+            
+            // 头部动画
+            const header = document.querySelector('header');
+            setTimeout(() => {
+                header.style.opacity = 0;
+                header.style.transform = 'translateY(-20px)';
+                setTimeout(() => {
+                    header.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                    header.style.opacity = 1;
+                    header.style.transform = 'translateY(0)';
+                }, 100);
+            }, 150);
+        });
+
+        // 添加鼠标悬停浮动效果
         const cards = document.querySelectorAll('.card');
-        cards.forEach((card, index) => {
-            card.style.animation = `fadeIn 0.5s ease ${index * 0.1}s forwards`;
-            card.style.opacity = 0;
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
         });
     </script>
 </body>
 </html>
+```
