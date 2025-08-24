@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KGT翻译软件介绍及注意事项</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #7209b7;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --warning-color: #f72585;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            animation: fadeIn 1s ease;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: var(--accent-color);
+            margin: 20px 0 15px;
+            font-size: 1.4rem;
+        }
+
+        .last-update {
+            color: #6c757d;
+            font-style: italic;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .card-title i {
+            margin-right: 12px;
+            font-size: 1.5rem;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            transition: var(--transition);
+        }
+
+        li:hover {
+            color: var(--secondary-color);
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .note {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .video-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .video-link {
+            display: inline-flex;
+            align-items: center;
+            background: var(--light-color);
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: var(--transition);
+        }
+
+        .video-link:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .video-link:hover i {
+            color: white;
+        }
+
+        .video-link i {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .video-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-language"></i> KGT翻译软件介绍及注意事项</h1>
+            <p class="last-update">最后一次编辑：2025年8月24日13:55:17</p>
+        </header>
+
+        <section>
+            <h2>关于软件下载</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-download"></i> 下载方式</h3>
+                    <ul>
+                        <li>请到Q群：<a href="https://qm.qq.com/q/1048013394" target="_blank">1048013394</a> 下载最新发布的翻译器软件（电脑）/脚本（手机，仅Renpy）</li>
+                        <li>在群文件中，电脑版请下载 <code>Kai GameTrans.zip</code> 和 <code>KGTRes.zip</code> 两个文件</li>
+                        <li>手机版请下载 <code>翻译脚本及字体（服务器版）.zip</code> 或 <code>翻译脚本及字体（本地版）.zip</code></li>
+                    </ul>
+                    <div class="note">
+                        <p><strong>注意：</strong>如果不知道用什么的就用服务器版，本地版配置较为麻烦仅作为备选（如果服务器出问题的话）</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>关于软件使用及注意事项</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-desktop"></i> 电脑版配置</h3>
+                    <p>电脑版的翻译配置请看教程视频：</p>
+                    <div class="video-links">
+                        <a href="https://www.bilibili.com/video/BV1c7gfzGEGT" target="_blank" class="video-link">
+                            <i class="fab fa-bilibili"></i> 硅基流动配置
+                        </a>
+                        <a href="https://www.bilibili.com/video/BV1tUKmz2EkS" target="_blank" class="video-link">
+                            <i class="fab fa-bilibili"></i> OpenRouter配置
+                        </a>
+                        <a href="https://www.bilibili.com/video/BV1BLbSz4E5F" target="_blank" class="video-link">
+                            <i class="fab fa-bilibili"></i> 无问芯穹配置
+                        </a>
+                        <a href="https://www.bilibili.com/video/BV1jsgfzqEQ3" target="_blank" class="video-link">
+                            <i class="fab fa-bilibili"></i> Ollama本地翻译配置
+                        </a>
+                    </div>
+                    <ul>
+                        <li><a href="https://cloud.siliconflow.cn/i/DcWwyaIR" target="_blank">硅基流动网址</a></li>
+                        <li>软件目前支持5种翻译接口（其实是4种，Edge接口不可用）：
+                            <ol>
+                                <li>硅基流动</li>
+                                <li>OpenRouter</li>
+                                <li>Edge翻译（不可用）</li>
+                                <li>无问芯穹</li>
+                                <li>Ollama（本地AI翻译）</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-mobile-alt"></i> 手机版配置</h3>
+                    <p>手机版的翻译配置见教程视频：</p>
+                    <div class="video-links">
+                        <a href="https://www.bilibili.com/video/BV1ir3Ez4ERc" target="_blank" class="video-link">
+                            <i class="fab fa-bilibili"></i> 服务器版
+                        </a>
+                        <a href="https://www.bilibili.com/video/BV1LZtEzeE2Z" target="_blank" class="video-link">
+                            <i class="fab fa-bilibili"></i> 本地版
+                        </a>
+                        <a href="https://www.bilibili.com/video/BV1J4tKzTEEv" target="_blank" class="video-link">
+                            <i class="fab fa-bilibili"></i> 字体替换教程2
+                        </a>
+                    </div>
+                    <div class="warning">
+                        <p><strong>注意：</strong>非纯小白可以使用替换教程2（特别是字体过多的游戏，但此方法有时候会失败），推荐将全部替换作为备选方案</p>
+                    </div>
+                    <ul>
+                        <li>对于不知道该下载怎么的请使用服务器版，如果服务器有时候出问题导致无法翻译（游戏显示游戏原文），请使用本地版</li>
+                        <li>使用手机版请确保游戏内的字体全部被替换，否则可能出现游戏内翻译后的文本显示为白框框（字体不兼容导致）</li>
+                    </ul>
+                    <div class="note">
+                        <p>注：手机中renpy的文件前面都会有x-前缀</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-cogs"></i> 使用说明</h3>
+                    <ul>
+                        <li>软件使用需要下载字体等依赖文件（KGTRes.zip），KGTRes.zip里的字体在正确配置后应解压在程序同目录下的KGTRes文件夹中</li>
+                        <li>软件下载后第一次打开默认是让你使用硅基流动进行apikey和模型的配置</li>
+                        <li>配置的模型请不要使用深度思考模型（例如名称中带有'R1'，'Z1'，'thinking'），否则可能会出现程序报AI返回为空或AI翻译十分缓慢的问题</li>
+                        <li>翻译器推荐使用硅基流动接口，因为硅基流动的API速度比OpenRouter快，限制比无问芯穹小</li>
+                        <li>如果AI翻译返回的是乱七八糟的东西非正常的翻译内容，请尝试清除翻译缓存以后让AI重新翻译</li>
+                    </ul>
+                    <div class="warning">
+                        <p><strong>重要：</strong>使用此软件请一定要关闭杀毒软件（包括windows自带杀毒），不关闭杀毒软件可能出现软件使用时突然退出，Renpy文件解包失败等问题</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>关于模型</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-brain"></i> 模型接口比较</h3>
+                    <ul>
+                        <li><a href="https://cloud.siliconflow.cn" target="_blank">硅基流动</a>：该接口最推荐使用，速度可能时快时慢，免费模型调用限制最小</li>
+                        <li><a href="https://openrouter.ai" target="_blank">OpenRouter</a>：该接口免费模型较多，但是速度比硅基流动慢，调用限制也算小</li>
+                        <li><a href="https://cloud.infini-ai.com" target="_blank">无问芯穹</a>：该接口可试用模型，并且模型参数量不小，速度也很快，但是调用限制相对于前2个接口更大</li>
+                    </ul>
+                    <div class="note">
+                        <p><strong>提示：</strong>如果将接口切换至无问芯穹，请注意在设置的上下文缓存中，禁用缓存与AI总结功能，否则token可能会超限。使用其他接口的付费模型也请注意适当调小或禁言缓存及AI总结功能，否则token爆炸。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>如何区分游戏引擎类型</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-laptop"></i> 电脑用户</h3>
+                    <ul>
+                        <li><strong>Renpy</strong>：在游戏目录中查看是否有renpy文件夹与game文件夹</li>
+                        <li><strong>Unity</strong>：在游戏目录中查看是否存在Unity的程序文件（例如：UnityCrashHandler.exe，CrashHandler.exe，UnityPlayer.dll等）</li>
+                        <li><strong>MV/MZ</strong>：在游戏目录中有node.dll nw.dll什么的文件，还有www locales等文件夹基本上就可以判断</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-mobile"></i> 手机用户</h3>
+                    <ul>
+                        <li><strong>Renpy</strong>：在游戏安装包的assets文件中查看是否有x-renpy文件夹，有的话则是renpy游戏</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>关于Renpy翻译问题</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-exclamation-triangle"></i> 常见问题</h3>
+                    <ul>
+                        <li>不管是电脑版还是手机版，翻译小说会有卡顿都是正常现象，这是由于AI翻译延迟导致的</li>
+                        <li>电脑版常见错误有字体白框框，游戏文本不翻译等问题</li>
+                        <li>手机游戏常见错误有字体白框框，进入游戏报错或闪退崩溃等问题</li>
+                        <li>目前脚本对某些Renpy 7.x 版本的游戏不兼容，手机端可能出现打开软件后无报错直接闪退，电脑端可能出现游戏文本无法获取</li>
+                    </ul>
+                    <div class="note">
+                        <p>查看版本：打开game目录中的script_version.txt查看</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>关于Unity翻译问题</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-gamepad"></i> Unity特定问题</h3>
+                    <ul>
+                        <li>Unity游戏有非插件注入模式、插件注入模式两种模式</li>
+                        <li>如果游戏出现修补以后打开出现黑框框（命令行），但之后很快就退出了，大概率是插件注入模式的BepInEx依赖下载错误</li>
+                        <li>Unity游戏有时候翻译会出现乱七八糟的内容，纯属AI抽风</li>
+                        <li>有些Unity游戏不支持XUnity的翻译</li>
+                        <li>有些Unity游戏的字体显示有问题，可能也是兼容性的问题，可能会出现中文中夹杂白框框的现象</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>其他错误</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-bug"></i> 故障排除</h3>
+                    <ul>
+                        <li>如果程序输出AI返回为空，请查看你配置的APIKEY以及模型是否正确</li>
+                        <li>如果输出游戏路径以后翻译器什么也没有输出，大概率是因为你的游戏非Renpy或Unity游戏</li>
+                        <li>程序内有OCR翻译（需另下载OCR.zip），但是不完善不建议使用</li>
+                        <li>有些模型在翻译文本以后他前面会多一几个换行符，这可能导致翻译出错，请尝试切换模型</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>关于错误反馈</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-bug"></i> 反馈指南</h3>
+                    <p>反馈基本要素：截图或视频，详细的错误描述，游戏本体</p>
+                    <ul>
+                        <li>电脑版如果遇到此文档中没有提到的错误，请尽量详细描述错误，并附带视频或截图，在群里@作者</li>
+                        <li>手机版遇到问题的话，如果是字体显示白框框请首先检查是否替换了所有的字体</li>
+                    </ul>
+                    <div class="note">
+                        <p>对于电脑版：如果群里有新版本请尝试使用新版本重新修补游戏再查看是否还存在问题</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>KGT翻译软件 &copy; 2025 | 最后更新: 2025年8月24日</p>
+        </footer>
+    </div>
+
+    <script>
+        // 添加平滑滚动效果
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 添加卡片加载动画
+        const cards = document.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+            card.style.animation = `fadeIn 0.5s ease ${index * 0.1}s forwards`;
+            card.style.opacity = 0;
+        });
+    </script>
+</body>
+</html>
