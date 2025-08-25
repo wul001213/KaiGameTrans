@@ -29,17 +29,16 @@
             --text-dark: #1e293b;
             --text-light: #f8fafc;
             --bg-light: #f8fafc;
-            --card-bg: rgba(255, 255, 255, 0.9);
-            --card-bg-dark: rgba(241, 245, 249, 0.75);
+            --card-bg: rgba(255, 255, 255, 0.92);
+            --card-bg-dark: rgba(241, 245, 249, 0.8);
             --border-radius: 20px;
             --card-radius: 24px;
-            --shadow: 0 20px 40px rgba(109, 40, 217, 0.1);
-            --shadow-hover: 0 30px 60px rgba(109, 40, 217, 0.15);
+            --shadow: 0 20px 40px rgba(109, 40, 217, 0.12);
+            --shadow-hover: 0 30px 60px rgba(109, 40, 217, 0.18);
             --transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
             --transition-fast: all 0.3s ease;
             --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             --gradient-soft: linear-gradient(135deg, #ede9fe 0%, #e0f2fe 100%);
-            --gradient-accent: linear-gradient(135deg, var(--accent) 0%, var(--primary-light) 100%);
             --section-spacing: 100px;
         }
 
@@ -156,7 +155,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--gradient-accent);
+            background: var(--accent);
             opacity: 0;
             transition: var(--transition);
             z-index: -1;
@@ -223,6 +222,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+            margin-bottom: 60px;
         }
 
         .feature-card {
@@ -302,43 +302,63 @@
             color: var(--secondary);
         }
 
-        /* Info Link - Moved Up */
-        .info-link {
+        /* Highlight Info Link - Now Prominent and Central */
+        .highlight-info {
             text-align: center;
-            margin: 80px 0 40px;
+            padding: 60px 20px;
+            margin: 0 auto var(--section-spacing);
+            max-width: 1000px;
+            background: var(--card-bg-dark);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: var(--card-radius);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
             opacity: 0;
             transform: translateY(30px);
-            transition: var(--transition);
         }
 
-        .info-link.visible {
+        .highlight-info.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .info-link a {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: var(--transition-fast);
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            background: var(--card-bg-dark);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        .highlight-info:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
         }
 
-        .info-link a:hover {
-            background: var(--primary);
+        .highlight-info h2 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-info p {
+            font-size: 1.15rem;
+            color: #475569;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-info a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gradient);
             color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(109, 40, 217, 0.2);
+            padding: 1rem 2.5rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 10px 25px rgba(109, 40, 217, 0.3);
+        }
+
+        .highlight-info a:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 16px 35px rgba(109, 40, 217, 0.4);
         }
 
         /* Video Section */
@@ -348,7 +368,7 @@
             text-align: center;
             padding: 80px 20px;
             border-radius: var(--card-radius);
-            margin: 0 auto;
+            margin: 0 auto var(--section-spacing);
             max-width: 1080px;
             position: relative;
             overflow: hidden;
@@ -523,8 +543,13 @@
             header {
                 padding: 100px 20px 60px;
             }
-            .info-link {
-                margin: 60px 0 30px;
+            .highlight-info {
+                margin-bottom: 80px;
+                padding: 40px 20px;
+            }
+            .highlight-info a {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
             }
         }
 
@@ -591,6 +616,15 @@
         </div>
     </section>
 
+    <!-- Highlight Info Link - Now a Standout Section -->
+    <div class="highlight-info animate">
+        <h2><i class="fas fa-book-open"></i> 需要详细教程？</h2>
+        <p>配置遇到问题？想了解所有使用技巧和注意事项？我们为您准备了完整的使用说明文档。</p>
+        <a href="info.html">
+            <i class="fas fa-external-link-alt"></i> 立即查看详细使用说明
+        </a>
+    </div>
+
     <!-- Demo Videos -->
     <section>
         <div class="video-section animate">
@@ -609,13 +643,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Info Link - Now Positioned Between Video and Download -->
-    <div class="info-link animate">
-        <a href="info.html">
-            <i class="fas fa-info-circle"></i> 查看详细使用说明与配置教程
-        </a>
-    </div>
 
     <!-- Download -->
     <section>
