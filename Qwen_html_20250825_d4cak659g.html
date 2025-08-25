@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Kai GameTrans (KGT) - 免费AI游戏翻译软件，支持Renpy、Unity、RPGMaker游戏一键汉化，电脑手机双端方案，集成硅基流动、OpenRouter等AI引擎。" />
+    <meta name="keywords" content="KGT, Kai GameTrans, 游戏翻译, AI汉化, Renpy翻译, Unity翻译, RPGMaker翻译, 免费翻译工具, 游戏mod, B站凯凯76579" />
+    <meta name="author" content="凯凯76579" />
+    <title>Kai GameTrans (KGT) - 免费AI游戏翻译软件 | 支持Renpy Unity RPGMaker</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="icon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="icon.ico" type="image/x-icon" />
+
+    <!-- Font & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        :root {
+            --primary: #6d28d9;
+            --primary-light: #8b5cf6;
+            --primary-dark: #4c1d95;
+            --secondary: #0ea5e9;
+            --accent: #ec4899;
+            --text-dark: #1e293b;
+            --text-light: #f8fafc;
+            --bg-light: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --card-bg-dark: rgba(241, 245, 249, 0.75);
+            --border-radius: 20px;
+            --card-radius: 24px;
+            --shadow: 0 20px 40px rgba(109, 40, 217, 0.1);
+            --shadow-hover: 0 30px 60px rgba(109, 40, 217, 0.15);
+            --transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --transition-fast: all 0.3s ease;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --gradient-soft: linear-gradient(135deg, #ede9fe 0%, #e0f2fe 100%);
+            --gradient-accent: linear-gradient(135deg, var(--accent) 0%, var(--primary-light) 100%);
+            --section-spacing: 100px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans SC', 'Segoe UI', sans-serif;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(109, 40, 217, 0.08) 0%, transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 25%);
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+            backdrop-filter: blur(20px);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header Hero Section */
+        header {
+            padding: 120px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 60px 30px;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: var(--card-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            position: relative;
+            z-index: 10;
+            transition: var(--transition);
+        }
+
+        .hero:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #475569;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.2rem;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 10px 25px rgba(109, 40, 217, 0.25);
+            min-width: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-accent);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 18px 35px rgba(109, 40, 217, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-dark);
+            border: 2px solid var(--primary-light);
+            box-shadow: 0 10px 25px rgba(14, 165, 233, 0.15);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-light);
+            color: white;
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 18px 35px rgba(14, 165, 233, 0.25);
+        }
+
+        /* Features Section */
+        section {
+            padding: var(--section-spacing) 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.4rem;
+            color: var(--text-dark);
+            margin-bottom: 60px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: var(--gradient);
+            margin: 16px auto 0;
+            border-radius: 3px;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: var(--transition);
+        }
+
+        .section-title.visible::after {
+            transform: scaleX(1);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: var(--card-radius);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(40px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: transparent;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover::before {
+            background: var(--gradient);
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .platform-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .platform-pc {
+            background: rgba(109, 40, 217, 0.15);
+            color: var(--primary);
+        }
+
+        .platform-mobile {
+            background: rgba(14, 165, 233, 0.15);
+            color: var(--secondary);
+        }
+
+        /* Info Link - Moved Up */
+        .info-link {
+            text-align: center;
+            margin: 80px 0 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+
+        .info-link.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .info-link a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition-fast);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            background: var(--card-bg-dark);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-link a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(109, 40, 217, 0.2);
+        }
+
+        /* Video Section */
+        .video-section {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            border-radius: var(--card-radius);
+            margin: 0 auto;
+            max-width: 1080px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .video-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .video-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .video-section p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .video-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .video-link {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            transition: var(--transition);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: 500;
+            min-width: 160px;
+        }
+
+        .video-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+        }
+
+        .video-link i {
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+
+        /* Download Section */
+        .download-section {
+            text-align: center;
+            background: white;
+            padding: 80px 20px;
+            border-radius: var(--card-radius);
+            box-shadow: var(--shadow);
+            max-width: 960px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .download-section:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .download-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .download-section p {
+            font-size: 1.15rem;
+            color: #64748b;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 20px 40px;
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn {
+                width: 100%;
+                max-width: 320px;
+            }
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+            section {
+                padding: 80px 20px;
+            }
+            header {
+                padding: 100px 20px 60px;
+            }
+            .info-link {
+                margin: 60px 0 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .video-links {
+                flex-direction: column;
+            }
+            .video-link {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="hero animate">
+            <h1><span>Kai GameTrans</span> (KGT)</h1>
+            <p>由B站 <strong>凯凯76579</strong> 开发的免费AI游戏翻译软件，支持 <strong>Renpy、Unity、RPGMaker</strong> 引擎游戏一键汉化。提供电脑版与手机版完整解决方案，集成硅基流动、OpenRouter、Ollama 等AI翻译接口，让游戏本地化更简单高效！</p>
+            <div class="cta-buttons">
+                <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=A7gsx82J65hfJQMUXt%2FZom6pZ4W17bdkT6SGG9K%2FlkfaTHaszW%2BjIhUbLPkvmegj&busi_data=eyJncm91cENvZGUiOiIxMDQ4MDEzMzk0IiwidG9rZW4iOiIyMGtpb3FvQk0xZkpxYVBzcVRzRVErWWlUQUU1VDVrWDQ0Z3FKdXVQZUl5Z1FOZEp4MEsrb3FaOFE2dnd0YjNuIiwidWluIjoiODU3ODIxMDgwIn0%3D&data=fNM7PBCrQ4c_RDILs4yYmkkceGITVlSG4RI0rCC5HuUcgY6vaD0_YqU6PlWRJz9k0boGmziCqpQe3Q4vlz4z2g&svctype=4&tempid=h5_group_info" target="_blank" class="btn">
+                    <i class="fas fa-users"></i> 加入官方Q群
+                </a>
+                <a href="https://space.bilibili.com/667716368" target="_blank" class="btn btn-outline">
+                    <i class="fab fa-bilibili"></i> 查看B站主页
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features -->
+    <section>
+        <h2 class="section-title animate">核心功能</h2>
+        <div class="features-grid">
+            <div class="feature-card animate">
+                <i class="fas fa-microchip"></i>
+                <h3>AI智能翻译</h3>
+                <p>集成硅基流动、OpenRouter、无问芯穹、Ollama 等AI引擎，支持多模型自由切换，利用先进AI技术提升翻译质量。</p>
+                <span class="platform-tag platform-pc">电脑端</span>
+            </div>
+            <div class="feature-card animate">
+                <i class="fas fa-gamepad"></i>
+                <h3>多引擎支持</h3>
+                <p>电脑版兼容 <strong>Renpy、Unity、RPGMaker(MV/MZ)</strong> 等主流游戏引擎，覆盖海量独立游戏与视觉小说。</p>
+                <span class="platform-tag platform-pc">电脑端</span>
+            </div>
+            <div class="feature-card animate">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>手机游戏汉化</h3>
+                <p>提供手机端完整方案，支持 <strong>Renpy</strong> 引擎游戏的脚本注入与汉化，让您在移动端也能畅玩中文游戏。</p>
+                <span class="platform-tag platform-mobile">手机端</span>
+            </div>
+            <div class="feature-card animate">
+                <i class="fas fa-lock-open"></i>
+                <h3>完全免费开源</h3>
+                <p>无广告、无内购、永久免费。秉承开源精神，助力每一位游戏汉化爱好者实现自己的翻译梦想。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Videos -->
+    <section>
+        <div class="video-section animate">
+            <h2><i class="fas fa-video"></i> 实际翻译演示</h2>
+            <p>看看KGT如何轻松汉化不同类型的游戏</p>
+            <div class="video-links">
+                <a href="https://www.bilibili.com/video/BV1ADezzHEU2" target="_blank" class="video-link">
+                    <i class="fab fa-bilibili"></i> RPGMaker MV/MZ
+                </a>
+                <a href="https://www.bilibili.com/video/BV1r3bSzFEGE" target="_blank" class="video-link">
+                    <i class="fab fa-bilibili"></i> Unity游戏
+                </a>
+                <a href="https://www.bilibili.com/video/BV1zP7TzyEL7" target="_blank" class="video-link">
+                    <i class="fab fa-bilibili"></i> Renpy游戏
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Link - Now Positioned Between Video and Download -->
+    <div class="info-link animate">
+        <a href="info.html">
+            <i class="fas fa-info-circle"></i> 查看详细使用说明与配置教程
+        </a>
+    </div>
+
+    <!-- Download -->
+    <section>
+        <div class="download-section animate">
+            <h2>立即开始使用</h2>
+            <p>加入官方Q群获取最新版软件、脚本与配置教程，开启你的游戏汉化之旅！</p>
+            <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=A7gsx82J65hfJQMUXt%2FZom6pZ4W17bdkT6SGG9K%2FlkfaTHaszW%2BjIhUbLPkvmegj&busi_data=eyJncm91cENvZGUiOiIxMDQ4MDEzMzk0IiwidG9rZW4iOiIyMGtpb3FvQk0xZkpxYVBzcVRzRVErWWlUQUU1VDVrWDQ0Z3FKdXVQZUl5Z1FOZEp4MEsrb3FaOFE2dnd0YjNuIiwidWluIjoiODU3ODIxMDgwIn0%3D&data=fNM7PBCrQ4c_RDILs4yYmkkceGITVlSG4RI0rCC5HuUcgY6vaD0_YqU6PlWRJz9k0boGmziCqpQe3Q4vlz4z2g&svctype=4&tempid=h5_group_info" target="_blank" class="btn">
+                <i class="fas fa-download"></i> 下载KGT & 加入Q群
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Kai GameTrans (KGT) &copy; 2025 | 由 <a href="https://space.bilibili.com/667716368" target="_blank">凯凯76579</a> 开发</p>
+        <p>建议使用前关闭杀毒软件以避免异常退出</p>
+    </footer>
+
+    <script>
+        // 滚动动画
+        const animateElements = () => {
+            const elements = document.querySelectorAll('.animate');
+            const windowHeight = window.innerHeight;
+            elements.forEach(el => {
+                const pos = el.getBoundingClientRect().top;
+                if (pos < windowHeight - 120 && !el.classList.contains('visible')) {
+                    el.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('load', animateElements);
+        window.addEventListener('scroll', animateElements);
+
+        // 延迟显示
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.animate').forEach((el, i) => {
+                    setTimeout(() => {
+                        el.style.opacity = 0;
+                        setTimeout(() => el.style.opacity = 1, 50);
+                    }, i * 150);
+                });
+            }, 300);
+        });
+    </script>
+</body>
+</html>
