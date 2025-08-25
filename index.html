@@ -29,16 +29,15 @@
             --text-dark: #1e293b;
             --text-light: #f8fafc;
             --bg-light: #f8fafc;
-            --card-bg: rgba(255, 255, 255, 0.92);
-            --card-bg-dark: rgba(241, 245, 249, 0.8);
+            --card-bg: rgba(255, 255, 255, 0.94);
+            --card-bg-dark: rgba(241, 245, 249, 0.85);
             --border-radius: 20px;
             --card-radius: 24px;
-            --shadow: 0 20px 40px rgba(109, 40, 217, 0.12);
-            --shadow-hover: 0 30px 60px rgba(109, 40, 217, 0.18);
-            --transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-            --transition-fast: all 0.3s ease;
+            --shadow: 0 15px 30px rgba(109, 40, 217, 0.1);
+            --shadow-hover: 0 25px 50px rgba(109, 40, 217, 0.15);
+            --transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --transition-fast: all 0.2s ease;
             --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            --gradient-soft: linear-gradient(135deg, #ede9fe 0%, #e0f2fe 100%);
             --section-spacing: 100px;
         }
 
@@ -88,6 +87,13 @@
             position: relative;
             z-index: 10;
             transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .hero:hover {
@@ -142,10 +148,17 @@
             font-size: 1.05rem;
             cursor: pointer;
             transition: var(--transition);
-            box-shadow: 0 10px 25px rgba(109, 40, 217, 0.25);
+            box-shadow: 0 8px 20px rgba(109, 40, 217, 0.2);
             min-width: 180px;
             position: relative;
             overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .btn.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .btn::before {
@@ -166,22 +179,22 @@
         }
 
         .btn:hover {
-            transform: translateY(-6px) scale(1.05);
-            box-shadow: 0 18px 35px rgba(109, 40, 217, 0.3);
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 14px 30px rgba(109, 40, 217, 0.25);
         }
 
         .btn-outline {
             background: transparent;
             color: var(--primary-dark);
             border: 2px solid var(--primary-light);
-            box-shadow: 0 10px 25px rgba(14, 165, 233, 0.15);
+            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.1);
         }
 
         .btn-outline:hover {
             background: var(--primary-light);
             color: white;
-            transform: translateY(-6px) scale(1.05);
-            box-shadow: 0 18px 35px rgba(14, 165, 233, 0.25);
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 14px 30px rgba(14, 165, 233, 0.2);
         }
 
         /* Features Section */
@@ -199,6 +212,13 @@
             display: inline-block;
             left: 50%;
             transform: translateX(-50%);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .section-title.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section-title::after {
@@ -211,7 +231,7 @@
             border-radius: 3px;
             transform: scaleX(0);
             transform-origin: center;
-            transition: var(--transition);
+            transition: var(--transition) 0.6s ease;
         }
 
         .section-title.visible::after {
@@ -262,7 +282,7 @@
         }
 
         .feature-card:hover {
-            transform: translateY(-12px);
+            transform: translateY(-8px);
             box-shadow: var(--shadow-hover);
         }
 
@@ -274,6 +294,11 @@
             background-clip: text;
             margin-bottom: 1.5rem;
             display: block;
+            transition: var(--transition-fast);
+        }
+
+        .feature-card:hover i {
+            transform: scale(1.08) rotate(3deg);
         }
 
         .feature-card h3 {
@@ -302,7 +327,7 @@
             color: var(--secondary);
         }
 
-        /* Highlight Info Link - Now Prominent and Central */
+        /* Highlight Info Link */
         .highlight-info {
             text-align: center;
             padding: 60px 20px;
@@ -325,7 +350,7 @@
         }
 
         .highlight-info:hover {
-            transform: translateY(-6px);
+            transform: translateY(-4px);
             box-shadow: var(--shadow-hover);
         }
 
@@ -333,6 +358,12 @@
             font-size: 2rem;
             color: var(--primary-dark);
             margin-bottom: 1.5rem;
+            transition: var(--transition-fast);
+        }
+
+        .highlight-info:hover h2 {
+            color: var(--primary);
+            transform: scale(1.02);
         }
 
         .highlight-info p {
@@ -353,12 +384,12 @@
             font-size: 1.1rem;
             text-decoration: none;
             transition: var(--transition);
-            box-shadow: 0 10px 25px rgba(109, 40, 217, 0.3);
+            box-shadow: 0 8px 20px rgba(109, 40, 217, 0.2);
         }
 
         .highlight-info a:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 16px 35px rgba(109, 40, 217, 0.4);
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 12px 25px rgba(109, 40, 217, 0.3);
         }
 
         /* Video Section */
@@ -373,6 +404,13 @@
             position: relative;
             overflow: hidden;
             box-shadow: var(--shadow-hover);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .video-section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .video-section::before {
@@ -430,17 +468,29 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             font-weight: 500;
             min-width: 160px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .video-link.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .video-link:hover {
             background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
         }
 
         .video-link i {
             margin-right: 8px;
             font-size: 1.2em;
+            transition: var(--transition-fast);
+        }
+
+        .video-link:hover i {
+            transform: scale(1.1) rotate(6deg);
         }
 
         /* Download Section */
@@ -455,10 +505,17 @@
             position: relative;
             overflow: hidden;
             transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .download-section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .download-section:hover {
-            transform: translateY(-6px);
+            transform: translateY(-4px);
             box-shadow: var(--shadow-hover);
         }
 
@@ -477,6 +534,29 @@
             margin-right: auto;
         }
 
+        .download-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .btn-download {
+            background: var(--gradient);
+        }
+
+        .btn-join-only {
+            background: transparent;
+            color: var(--primary-dark);
+            border: 2px solid var(--primary-light);
+        }
+
+        .btn-join-only:hover {
+            background: var(--primary-light);
+            color: white;
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -484,6 +564,13 @@
             color: #64748b;
             font-size: 0.95rem;
             margin-top: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        footer.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         footer a {
@@ -511,13 +598,13 @@
         .animate {
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
         .animate.visible {
             opacity: 1;
             transform: translateY(0);
-            animation: fadeInUp 1s ease forwards;
+            animation: fadeInUp 0.8s ease forwards;
         }
 
         /* Responsive */
@@ -525,7 +612,7 @@
             .hero h1 {
                 font-size: 2.5rem;
             }
-            .cta-buttons {
+            .cta-buttons, .download-buttons {
                 flex-direction: column;
                 align-items: center;
             }
@@ -574,12 +661,14 @@
     <header>
         <div class="hero animate">
             <h1><span>Kai GameTrans</span> (KGT)</h1>
-            <p>由B站 <strong>凯凯76579</strong> 开发的免费AI游戏翻译软件，支持 <strong>Renpy、Unity、RPGMaker</strong> 引擎游戏一键汉化。提供电脑版与手机版完整解决方案，集成硅基流动、OpenRouter、Ollama 等AI翻译接口，让游戏本地化更简单高效！</p>
+            <p><strong>Kai GameTrans（KGT）</strong>是由B站<strong>凯凯76579</strong>开发的一款免费AI游戏翻译软件。</p>
+            <p>目前该翻译器支持<strong>Renpy</strong>、<strong>Unity</strong>和<strong>RPGMaker(MV/MZ)</strong>引擎游戏的翻译，为广大游戏爱好者提供了便捷的翻译解决方案。</p>
+            <p>了解更多使用技巧和最新动态，请加入官方Q群获取第一手信息！</p>
             <div class="cta-buttons">
-                <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=A7gsx82J65hfJQMUXt%2FZom6pZ4W17bdkT6SGG9K%2FlkfaTHaszW%2BjIhUbLPkvmegj&busi_data=eyJncm91cENvZGUiOiIxMDQ4MDEzMzk0IiwidG9rZW4iOiIyMGtpb3FvQk0xZkpxYVBzcVRzRVErWWlUQUU1VDVrWDQ0Z3FKdXVQZUl5Z1FOZEp4MEsrb3FaOFE2dnd0YjNuIiwidWluIjoiODU3ODIxMDgwIn0%3D&data=fNM7PBCrQ4c_RDILs4yYmkkceGITVlSG4RI0rCC5HuUcgY6vaD0_YqU6PlWRJz9k0boGmziCqpQe3Q4vlz4z2g&svctype=4&tempid=h5_group_info" target="_blank" class="btn">
+                <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=A7gsx82J65hfJQMUXt%2FZom6pZ4W17bdkT6SGG9K%2FlkfaTHaszW%2BjIhUbLPkvmegj&busi_data=eyJncm91cENvZGUiOiIxMDQ4MDEzMzk0IiwidG9rZW4iOiIyMGtpb3FvQk0xZkpxYVBzcVRzRVErWWlUQUU1VDVrWDQ0Z3FKdXVQZUl5Z1FOZEp4MEsrb3FaOFE2dnd0YjNuIiwidWluIjoiODU3ODIxMDgwIn0%3D&data=fNM7PBCrQ4c_RDILs4yYmkkceGITVlSG4RI0rCC5HuUcgY6vaD0_YqU6PlWRJz9k0boGmziCqpQe3Q4vlz4z2g&svctype=4&tempid=h5_group_info" target="_blank" class="btn animate">
                     <i class="fas fa-users"></i> 加入官方Q群
                 </a>
-                <a href="https://space.bilibili.com/667716368" target="_blank" class="btn btn-outline">
+                <a href="https://space.bilibili.com/667716368" target="_blank" class="btn btn-outline animate">
                     <i class="fab fa-bilibili"></i> 查看B站主页
                 </a>
             </div>
@@ -593,35 +682,35 @@
             <div class="feature-card animate">
                 <i class="fas fa-microchip"></i>
                 <h3>AI智能翻译</h3>
-                <p>集成硅基流动、OpenRouter、无问芯穹、Ollama 等AI引擎，支持多模型自由切换，利用先进AI技术提升翻译质量。</p>
+                <p>使用AI进行翻译，有效减少前言不搭后语的机翻问题，支持多模型自由切换。</p>
                 <span class="platform-tag platform-pc">电脑端</span>
             </div>
             <div class="feature-card animate">
                 <i class="fas fa-gamepad"></i>
                 <h3>多引擎支持</h3>
-                <p>电脑版兼容 <strong>Renpy、Unity、RPGMaker(MV/MZ)</strong> 等主流游戏引擎，覆盖海量独立游戏与视觉小说。</p>
+                <p>电脑版兼容 <strong>Renpy、Unity、RPGMaker(MV/MZ)</strong> 等主流游戏引擎，支持多种常见的独立游戏与视觉小说。</p>
                 <span class="platform-tag platform-pc">电脑端</span>
             </div>
             <div class="feature-card animate">
                 <i class="fas fa-mobile-alt"></i>
                 <h3>手机游戏汉化</h3>
-                <p>提供手机端完整方案，支持 <strong>Renpy</strong> 引擎游戏的脚本注入与汉化，让您在移动端也能畅玩中文游戏。</p>
+                <p>提供手机端方案，支持 <strong>Renpy</strong> 引擎游戏的脚本注入与汉化。目前主要支持Renpy 8.x版本，对7.x版本支持有限。</p>
                 <span class="platform-tag platform-mobile">手机端</span>
             </div>
             <div class="feature-card animate">
                 <i class="fas fa-lock-open"></i>
-                <h3>完全免费开源</h3>
-                <p>无广告、无内购、永久免费。秉承开源精神，助力每一位游戏汉化爱好者实现自己的翻译梦想。</p>
+                <h3>完全免费</h3>
+                <p>无广告、无内购、永久免费。为游戏汉化爱好者提供一个便捷的工具。</p>
             </div>
         </div>
     </section>
 
-    <!-- Highlight Info Link - Now a Standout Section -->
+    <!-- Highlight Info Link -->
     <div class="highlight-info animate">
-        <h2><i class="fas fa-book-open"></i> 需要详细教程？</h2>
-        <p>配置遇到问题？想了解所有使用技巧和注意事项？我们为您准备了完整的使用说明文档。</p>
+        <h2><i class="fas fa-book-open"></i> 使用说明与详细教程</h2>
+        <p>本页面同时也是KGT的完整说明文档。包含下载、配置、使用技巧和常见问题解答。</p>
         <a href="info.html">
-            <i class="fas fa-external-link-alt"></i> 立即查看详细使用说明
+            <i class="fas fa-external-link-alt"></i> 查看完整说明文档
         </a>
     </div>
 
@@ -631,13 +720,13 @@
             <h2><i class="fas fa-video"></i> 实际翻译演示</h2>
             <p>看看KGT如何轻松汉化不同类型的游戏</p>
             <div class="video-links">
-                <a href="https://www.bilibili.com/video/BV1ADezzHEU2" target="_blank" class="video-link">
+                <a href="https://www.bilibili.com/video/BV1ADezzHEU2" target="_blank" class="video-link animate">
                     <i class="fab fa-bilibili"></i> RPGMaker MV/MZ
                 </a>
-                <a href="https://www.bilibili.com/video/BV1r3bSzFEGE" target="_blank" class="video-link">
+                <a href="https://www.bilibili.com/video/BV1r3bSzFEGE" target="_blank" class="video-link animate">
                     <i class="fab fa-bilibili"></i> Unity游戏
                 </a>
-                <a href="https://www.bilibili.com/video/BV1zP7TzyEL7" target="_blank" class="video-link">
+                <a href="https://www.bilibili.com/video/BV1zP7TzyEL7" target="_blank" class="video-link animate">
                     <i class="fab fa-bilibili"></i> Renpy游戏
                 </a>
             </div>
@@ -649,14 +738,19 @@
         <div class="download-section animate">
             <h2>立即开始使用</h2>
             <p>加入官方Q群获取最新版软件、脚本与配置教程，开启你的游戏汉化之旅！</p>
-            <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=A7gsx82J65hfJQMUXt%2FZom6pZ4W17bdkT6SGG9K%2FlkfaTHaszW%2BjIhUbLPkvmegj&busi_data=eyJncm91cENvZGUiOiIxMDQ4MDEzMzk0IiwidG9rZW4iOiIyMGtpb3FvQk0xZkpxYVBzcVRzRVErWWlUQUU1VDVrWDQ0Z3FKdXVQZUl5Z1FOZEp4MEsrb3FaOFE2dnd0YjNuIiwidWluIjoiODU3ODIxMDgwIn0%3D&data=fNM7PBCrQ4c_RDILs4yYmkkceGITVlSG4RI0rCC5HuUcgY6vaD0_YqU6PlWRJz9k0boGmziCqpQe3Q4vlz4z2g&svctype=4&tempid=h5_group_info" target="_blank" class="btn">
-                <i class="fas fa-download"></i> 下载KGT & 加入Q群
-            </a>
+            <div class="download-buttons">
+                <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=A7gsx82J65hfJQMUXt%2FZom6pZ4W17bdkT6SGG9K%2FlkfaTHaszW%2BjIhUbLPkvmegj&busi_data=eyJncm91cENvZGUiOiIxMDQ4MDEzMzk0IiwidG9rZW4iOiIyMGtpb3FvQk0xZkpxYVBzcVRzRVErWWlUQUU1VDVrWDQ0Z3FKdXVQZUl5Z1FOZEp4MEsrb3FaOFE2dnd0YjNuIiwidWluIjoiODU3ODIxMDgwIn0%3D&data=fNM7PBCrQ4c_RDILs4yYmkkceGITVlSG4RI0rCC5HuUcgY6vaD0_YqU6PlWRJz9k0boGmziCqpQe3Q4vlz4z2g&svctype=4&tempid=h5_group_info" target="_blank" class="btn btn-download">
+                    <i class="fas fa-download"></i> 下载KGT & 加入Q群
+                </a>
+                <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=A7gsx82J65hfJQMUXt%2FZom6pZ4W17bdkT6SGG9K%2FlkfaTHaszW%2BjIhUbLPkvmegj&busi_data=eyJncm91cENvZGUiOiIxMDQ4MDEzMzk0IiwidG9rZW4iOiIyMGtpb3FvQk0xZkpxYVBzcVRzRVErWWlUQUU1VDVrWDQ0Z3FKdXVQZUl5Z1FOZEp4MEsrb3FaOFE2dnd0YjNuIiwidWluIjoiODU3ODIxMDgwIn0%3D&data=fNM7PBCrQ4c_RDILs4yYmkkceGITVlSG4RI0rCC5HuUcgY6vaD0_YqU6PlWRJz9k0boGmziCqpQe3Q4vlz4z2g&svctype=4&tempid=h5_group_info" target="_blank" class="btn btn-join-only">
+                    <i class="fas fa-users"></i> 仅加入Q群
+                </a>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="animate">
         <p>Kai GameTrans (KGT) &copy; 2025 | 由 <a href="https://space.bilibili.com/667716368" target="_blank">凯凯76579</a> 开发</p>
         <p>建议使用前关闭杀毒软件以避免异常退出</p>
     </footer>
@@ -666,10 +760,12 @@
         const animateElements = () => {
             const elements = document.querySelectorAll('.animate');
             const windowHeight = window.innerHeight;
-            elements.forEach(el => {
+            elements.forEach((el, index) => {
                 const pos = el.getBoundingClientRect().top;
-                if (pos < windowHeight - 120 && !el.classList.contains('visible')) {
-                    el.classList.add('visible');
+                if (pos < windowHeight - 100 && !el.classList.contains('visible')) {
+                    setTimeout(() => {
+                        el.classList.add('visible');
+                    }, index * 80);
                 }
             });
         };
@@ -677,16 +773,11 @@
         window.addEventListener('load', animateElements);
         window.addEventListener('scroll', animateElements);
 
-        // 延迟显示
+        // 页面加载后，为 hero 添加可见性
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
-                document.querySelectorAll('.animate').forEach((el, i) => {
-                    setTimeout(() => {
-                        el.style.opacity = 0;
-                        setTimeout(() => el.style.opacity = 1, 50);
-                    }, i * 150);
-                });
-            }, 300);
+                document.querySelector('.hero').classList.add('visible');
+            }, 200);
         });
     </script>
 </body>
