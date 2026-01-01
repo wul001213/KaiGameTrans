@@ -1,248 +1,413 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <title>KaiGameTrans (KGT) - 免费 AI 内嵌游戏翻译软件</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="KaiGameTrans（KGT）是一款永久免费的 AI 游戏翻译器，支持 Renpy、Unity、RPGMaker 游戏内嵌实时汉化，Windows / Linux / Android 全平台通用。">
-  <meta name="keywords" content="KGT,KaiGameTrans,游戏翻译软件,AI游戏翻译,Renpy翻译,Unity翻译,RPGMaker翻译,免费翻译工具,凯凯76579">
-  <meta name="author" content="凯凯76579">
-  <meta name="robots" content="index,follow">
-  <meta name="baidu-site-verification" content="codeva-4Syxwm8tVr">
-  <meta name="msvalidate.01" content="D60251E25459C986BCEC03E1B4C29504">
-  <meta name="google-site-verification" content="d1QlN-HFEtIDeqgHanrQDDQ-6f9LPKJhoWYOSI38jjE">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none';">
-  <link rel="icon" href="icon.ico">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="KaiGameTrans (KGT) - 免费 AI 游戏翻译">
-  <meta property="og:description" content="支持 Renpy / Unity / RPGMaker 的免费 AI 内嵌翻译器，全平台通用。">
-  <meta property="og:image" content="icon.ico">
-  <meta name="twitter:card" content="summary_large_image">
-  <style>
-  /* ===== 设计令牌 ===== */
-  :root{
-    --p:#7c3aed;
-    --pl:#a78bfa;
-    --pd:#5b21b6;
-    --s:#0ea5e9;
-    --a:#ec4899;
-    --t:#1e293b;
-    --tl:#f8fafc;
-    --bg:#f8fafc;
-    --c:#ffffff;
-    --cg:#f1f5f9;
-    --r:24px;
-    --rc:32px;
-    --sh:8px 8px 16px #d1d5db,-8px -8px 16px #ffffff;
-    --shh:12px 12px 24px #d1d5db,-12px -12px 24px #ffffff;
-    --tr:.3s;
-    --g:linear-gradient(135deg,var(--p) 0%,var(--s) 100%);
-  }
-  @media (prefers-color-scheme:dark){
-    :root{
-      --t:#e2e8f0;
-      --bg:#0f172a;
-      --c:#1e293b;
-      --cg:#0b1220;
-      --sh:8px 8px 16px #020617,-8px -8px 16px #1e293b;
-      --shh:12px 12px 24px #020617,-12px -12px 24px #1e293b;
-    }
-  }
-  /* ===== 全局 ===== */
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{font:400 16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;color:var(--t);background:var(--bg);min-height:100vh}
-  img{max-width:100%;display:block}
-  a{text-decoration:none;color:inherit}
-  .wrap{max-width:1200px;margin:0 auto;padding:0 1.5rem}
-  /* ===== 按钮 ===== */
-  .btn{display:inline-flex;align-items:center;justify-content:center;padding:1rem 2.2rem;border-radius:60px;font-weight:600;font-size:1rem;border:0;cursor:pointer;position:relative;overflow:hidden;transition:var(--tr);box-shadow:var(--sh);background:var(--g);color:#fff;min-height:48px}
-  .btn:hover{transform:translateY(-4px) scale(1.03);box-shadow:var(--shh)}
-  .btn-outline{background:transparent;color:var(--p);border:2px solid var(--pl);box-shadow:none}
-  .btn-outline:hover{background:var(--pl);color:#fff}
-  /* ===== 头部 ===== */
-  header{padding:120px 0 80px}
-  .hero{background:var(--c);border-radius:var(--rc);box-shadow:var(--sh);padding:60px 30px;max-width:800px;margin:0 auto;text-align:center;opacity:0;transform:translateY(20px);transition:var(--tr)}
-  .hero.visible{opacity:1;transform:translateY(0)}
-  .hero:hover{transform:translateY(-4px);box-shadow:var(--shh)}
-  .hero h1{font-size:clamp(2.5rem,6vw,4rem);font-weight:800;margin-bottom:1rem}
-  .hero h1 span{background:var(--g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-  .hero p{font-size:1.1rem;color:#64748b;margin-bottom:1rem}
-  .cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem}
-  /* ===== 特性 ===== */
-  section{padding:100px 0}
-  .tit{text-align:center;font-size:2.4rem;font-weight:700;margin-bottom:60px;opacity:0;transform:translateY(30px);transition:var(--tr)}
-  .tit.visible{opacity:1;transform:translateY(0)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax 260px,1fr);gap:2rem}
-  .card{background:var(--c);border-radius:var(--rc);padding:2.5rem 2rem;text-align:center;box-shadow:var(--sh);transition:var(--tr);opacity:0;transform:translateY(40px)}
-  .card.visible{opacity:1;transform:translateY(0)}
-  .card:hover{transform:translateY(-8px);box-shadow:var(--shh)}
-  .card i{font-size:3rem;background:var(--g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1.5rem;display:block}
-  .card h3{font-size:1.5rem;margin-bottom:1rem;color:var(--pd)}
-  .tag{display:inline-block;padding:.4rem 1rem;border-radius:50px;font-size:.85rem;font-weight:600;margin-top:.5rem;background:rgba(124,58,237,.15);color:var(--p)}
-  /* ===== 高亮 ===== */
-  .hl{background:var(--cg);border-radius:var(--rc);box-shadow:var(--sh);max-width:1000px;margin:0 auto 100px;padding:60px 20px;text-align:center;opacity:0;transform:translateY(30px);transition:var(--tr)}
-  .hl.visible{opacity:1;transform:translateY(0)}
-  .hl:hover{transform:translateY(-4px);box-shadow:var(--shh)}
-  .hl h2{font-size:2rem;color:var(--pd);margin-bottom:1.5rem}
-  .hl p{font-size:1.15rem;color:#64748b;margin-bottom:1.5rem}
-  .hl a{display:inline-flex;align-items:center;gap:10px;background:var(--g);color:#fff;padding:1rem 2.5rem;border-radius:60px;font-weight:600;font-size:1.1rem;transition:var(--tr);box-shadow:var(--sh)}
-  .hl a:hover{transform:translateY(-3px) scale(1.04);box-shadow:var(--shh)}
-  /* ===== 视频区域（修复+美化） ===== */
-  .vid{background:var(--g);color:#fff;text-align:center;padding:80px 20px;border-radius:var(--rc);max-width:1080px;margin:0 auto 100px;position:relative;overflow:hidden;opacity:0;transform:translateY(30px);transition:var(--tr)}
-  .vid.visible{opacity:1;transform:translateY(0)}
-  .vid::before{content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.1) 0%,transparent 70%);animation:rot 20s linear infinite}
-  @keyframes rot{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-  .vid h2{font-size:2.2rem;margin-bottom:1rem;position:relative;z-index:1}
-  .vid p{font-size:1.1rem;opacity:.9;margin-bottom:2rem;position:relative;z-index:1}
-  .vlinks{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
-  .vlink{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.3);padding:1rem 1.5rem;border-radius:var(--r);backdrop-filter:blur(8px);font-weight:500;min-width:160px;opacity:0;transform:translateY(20px);transition:var(--tr);display:flex;flex-direction:column;align-items:center;gap:.5rem}
-.vlink.visible{opacity:1;transform:translateY(0)}
-.vlink:hover{background:rgba(255,255,255,.3);border-color:rgba(255,255,255,.8);transform:translateY(-4px) scale(1.03)}
-.vlink i{font-size:2rem;color:#fff}   /* 确保图标可见 */
-.vlink span{font-size:.95rem;color:#fff} /* 确保文字可见 */
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>兽门酒馆共享号</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --md-sys-color-primary: #6750A4;
+            --md-sys-color-on-primary: #FFFFFF;
+            --md-sys-color-primary-container: #EADDFF;
+            --md-sys-color-on-primary-container: #21005D;
+            --md-sys-color-secondary: #625B71;
+            --md-sys-color-on-secondary: #FFFFFF;
+            --md-sys-color-secondary-container: #E8DEF8;
+            --md-sys-color-on-secondary-container: #1D192B;
+            --md-sys-color-tertiary: #7D5260;
+            --md-sys-color-on-tertiary: #FFFFFF;
+            --md-sys-color-tertiary-container: #FFD8E4;
+            --md-sys-color-on-tertiary-container: #31111D;
+            --md-sys-color-surface: #FEF7FF;
+            --md-sys-color-on-surface: #1D1B20;
+            --md-sys-color-surface-variant: #E7E0EC;
+            --md-sys-color-on-surface-variant: #49454F;
+            --md-sys-color-outline: #79747E;
+            --md-sys-color-outline-variant: #CAC4D0;
+            --md-sys-color-shadow: #000000;
+            --md-sys-color-scrim: #000000;
+            --md-sys-color-inverse-surface: #322F35;
+            --md-sys-color-inverse-on-surface: #F4EFF4;
+            --md-sys-color-inverse-primary: #D0BCFF;
+            --md-sys-color-surface-dim: #DDD8E1;
+            --md-sys-color-surface-bright: #FEF7FF;
+            --md-sys-color-surface-container-lowest: #FFFFFF;
+            --md-sys-color-surface-container-low: #F7F2FA;
+            --md-sys-color-surface-container: #F1ECF4;
+            --md-sys-color-surface-container-high: #ECE6F0;
+            --md-sys-color-surface-container-highest: #E6E0E9;
+            --md-sys-elevation-level1: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level2: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level3: 0px 1px 3px 0px rgba(0, 0, 0, 0.3), 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level4: 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 6px 10px 4px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level5: 0px 4px 4px 0px rgba(0, 0, 0, 0.3), 0px 8px 12px 6px rgba(0, 0, 0, 0.15);
+            --md-sys-shape-corner-none: 0px;
+            --md-sys-shape-corner-extra-small: 4px;
+            --md-sys-shape-corner-small: 8px;
+            --md-sys-shape-corner-medium: 12px;
+            --md-sys-shape-corner-large: 16px;
+            --md-sys-shape-corner-extra-large: 28px;
+            --md-sys-state-disabled: 0.38;
+            --md-sys-state-hover: 0.08;
+            --md-sys-state-focus: 0.12;
+            --md-sys-state-pressed: 0.12;
+            --md-sys-state-dragged: 0.16;
+            --md-sys-motion-easing-emphasized: cubic-bezier(0.2, 0.0, 0.0, 1.0);
+            --md-sys-motion-easing-standard: cubic-bezier(0.2, 0.0, 0.0, 1.0);
+            --md-sys-motion-easing-standard-decelerate: cubic-bezier(0.0, 0.0, 0.0, 1.0);
+            --md-sys-motion-easing-standard-accelerate: cubic-bezier(0.3, 0.0, 1.0, 1.0);
+        }
 
-/* 暗色模式额外高对比 */
-@media (prefers-color-scheme:dark){
-  .vlink{background:rgba(15,23,42,.25);border:1px solid rgba(226,232,240,.25);color:#e2e8f0}
-  .vlink:hover{background:rgba(15,23,42,.4);border-color:rgba(226,232,240,.8)}
-  .vlink i,.vlink span{color:#e2e8f0}
-}
-  /* ===== 下载 ===== */
-  .down{background:var(--c);text-align:center;padding:80px 20px;border-radius:var(--rc);box-shadow:var(--sh);max-width:960px;margin:0 auto;opacity:0;transform:translateY(30px);transition:var(--tr)}
-  .down.visible{opacity:1;transform:translateY(0)}
-  .down:hover{transform:translateY(-4px);box-shadow:var(--shh)}
-  .down h2{font-size:2.2rem;margin-bottom:1.5rem}
-  .down p{font-size:1.15rem;color:#64748b;margin-bottom:2.5rem}
-  .dlinks{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-  /* ===== 回到顶部 ===== */
-  #top{position:fixed;bottom:2rem;right:2rem;width:3rem;height:3rem;border-radius:50%;background:var(--g);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:var(--tr);z-index:999;box-shadow:var(--sh)}
-  #top.visible{opacity:.7}
-  #top:hover{opacity:1;transform:scale(1.1)}
-  /* ===== 页脚 ===== */
-  footer{text-align:center;padding:60px 20px 40px;color:#64748b;font-size:.95rem;opacity:0;transform:translateY(30px);transition:var(--tr)}
-  footer.visible{opacity:1;transform:translateY(0)}
-  footer a{color:var(--p);font-weight:600}
-  footer a:hover{text-decoration:underline}
-  /* ===== 响应式 ===== */
-  @media(max-width:768px){.hero h1{font-size:2.5rem}.cta,.dlinks{flex-direction:column;align-items:center}.btn{width:100%;max-width:320px}.tit{font-size:2rem}section{padding:80px 0}.hl{margin-bottom:80px;padding:40px 20px}.vlinks{flex-direction:column}}
-  @media(max-width:480px){.hero h1{font-size:2.2rem}.tit{font-size:1.8rem}}
-  </style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            line-height: 1.5;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(255, 182, 193, 0.4), transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(173, 216, 230, 0.4), transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.3), transparent 60%);
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: moveBackground 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(20px, 20px); }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #444;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            border-radius: 2px;
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .md-button {
+            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+            box-shadow: 0 4px 15px 0 rgba(116, 235, 213, 0.3);
+            position: relative;
+            overflow: hidden;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: translateY(0);
+        }
+
+        .md-button:hover {
+            box-shadow: 0 8px 25px 0 rgba(116, 235, 213, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .md-button:active {
+            box-shadow: 0 4px 15px 0 rgba(31, 38, 135, 0.2);
+            transform: translateY(0);
+        }
+
+        .md-button:focus {
+            outline: none;
+        }
+
+        .md-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .md-button:hover::before {
+            left: 100%;
+        }
+
+        .md-button::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        .md-button:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        .md-button.secondary {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .md-button.secondary:hover {
+            box-shadow: 0 8px 25px 0 rgba(252, 182, 159, 0.4);
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            20% {
+                transform: scale(25, 25);
+                opacity: 0.3;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(40, 40);
+            }
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 50px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.2, 0, 0, 1);
+            z-index: 1000;
+            max-width: 80%;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .loading {
+            position: relative;
+            color: transparent;
+        }
+
+        .loading::after {
+            content: "";
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            top: 50%;
+            left: 50%;
+            margin-left: -12px;
+            margin-top: -12px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 24px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <div class="hero">
-        <h1><span>KaiGameTrans</span> (KGT)</h1>
-        <p><strong>KaiGameTrans（KGT）</strong>是由 B 站<strong>凯凯76579</strong>开发的一款免费 AI 内嵌游戏翻译软件。</p>
-        <p>目前该翻译器支持 <strong>Renpy</strong>、<strong>Unity</strong> 和 <strong>RPGMaker(MV/MZ)</strong> 引擎游戏的翻译，支持多语种翻译。</p>
-        <p>获取软件最新的更新和 Bug 修复，请加入我们的 Q 群以及时获取最新版本的信息！</p>
-        <div class="cta">
-          <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=A7gsx82J65hfJQMUXt%2FZom6pZ4W17bdkT6SGG9K%2FlkfaTHaszW%2BjIhUbLPkvmegj&busi_data=eyJncm91cENvZGUiOiIxMDQ4MDEzMzk0IiwidG9rZW4iOiIyMGtpb3FvQk0xZkpxYVBzcVRzRVErWWlUQUU1VDVrWDQ0Z3FKdXVQZUl5Z1FOZEp4MEsrb3FaOFE2dnd0YjNuIiwidWluIjoiODU3ODIxMDgwIn0%3D&data=fNM7PBCrQ4c_RDILs4yYmkkceGITVlSG4RI0rCC5HuUcgY6vaD0_YqU6PlWRJz9k0boGmziCqpQe3Q4vlz4z2g&svctype=4&tempid=h5_group_info" target="_blank" class="btn" rel="noopener noreferrer"><i class="fas fa-users"></i> 加入官方 Q 群</a>
-          <a href="https://space.bilibili.com/667716368" target="_blank" class="btn btn-outline" rel="noopener noreferrer"><i class="fab fa-bilibili"></i> 查看 B 站主页</a>
+    <div class="container">
+        <h1>兽门酒馆共享号</h1>
+        <div class="buttons-container">
+            <button id="shoumen-btn" class="md-button">兽门酒馆（共享号）</button>
+            <button id="exl-btn" class="md-button secondary">EXL酒馆（共享号）</button>
         </div>
-      </div>
     </div>
-  </header>
+    <div id="toast" class="toast"></div>
 
-  <section>
-    <div class="wrap">
-      <h2 class="tit">主 要 功 能</h2>
-      <div class="grid">
-        <div class="card">
-          <i class="fas fa-microchip"></i>
-          <h3>AI 文本翻译</h3>
-          <p>使用 AI 进行游戏文本的翻译，有效减少前言不搭后语的机翻问题，表达更流畅。支持多模型自由切换。</p>
-          <span class="tag">电脑端</span>
-        </div>
-        <div class="card">
-          <i class="fas fa-gamepad"></i>
-          <h3>多引擎支持</h3>
-          <p>Windows 兼容 <strong>Renpy、Unity、RPGMaker(MV/MZ)</strong> 引擎游戏的翻译，支持多种常见的独立游戏与视觉小说。</p>
-          <p>其他平台（Linux / Android）兼容 <strong>Renpy、RPGMaker（MV/MZ）引擎游戏的翻译，兼容性较好。</strong></p>
-          <span class="tag">电脑端</span>
-        </div>
-        <div class="card">
-          <i class="fas fa-lock-open"></i>
-          <h3>完全免费</h3>
-          <p>软件基本上是周更，但是承诺功能 <strong>不会收费</strong> 且永久免费。</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toast = document.getElementById('toast');
+            const shoumenBtn = document.getElementById('shoumen-btn');
+            const exlBtn = document.getElementById('exl-btn');
 
-  <div class="hl">
-    <div class="wrap">
-      <h2><i class="fas fa-book-open"></i> 使用说明与教程</h2>
-      <p>本页为 KGT 翻译器的详细介绍 & 使用教程 & 注意事项</p>
-      <a href="info.html"><i class="fas fa-external-link-alt"></i> 查看完整说明文档</a>
-    </div>
-  </div>
+            function showToast(message, duration = 3000) {
+                toast.textContent = message;
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, duration);
+            }
 
-  <section>
-    <div class="vid">
-      <div class="wrap">
-        <h2><i class="fas fa-video"></i> 翻译演示视频</h2>
-        <p>以下为 KGT 翻译器的使用演示视频（也是教程视频）</p>
-        <div class="vlinks">
-          <a href="https://www.bilibili.com/video/BV1jBxEz8EZL" target="_blank" class="vlink" rel="noopener noreferrer">
-            <i class="fab fa-bilibili"></i>
-            <span>Windows 端使用</span>
-          </a>
-          <a href="https://www.bilibili.com/video/BV1pmWtztENj" target="_blank" class="vlink" rel="noopener noreferrer">
-            <i class="fab fa-bilibili"></i>
-            <span>手机端使用</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+            async function handleButtonClick(apiUrl, redirectUrl, btn) {
+                if (btn.classList.contains('loading')) {
+                    return;
+                }
+                
+                btn.classList.add('loading');
+                btn.disabled = true;
+                
+                try {
+                    // 使用本地代理服务器
+                    const proxyUrl = `/proxy/${apiUrl}`;
+                    console.log('请求代理URL:', proxyUrl);
+                    
+                    const response = await fetch(proxyUrl);
+                    const responseText = await response.text();
+                    
+                    // 处理可能的非标准JSON格式
+                    let data;
+                    try {
+                        // 尝试直接解析JSON
+                        data = JSON.parse(responseText);
+                    } catch (e) {
+                        // 如果失败，尝试处理可能的格式问题
+                        // 移除可能的BOM或其他字符
+                        const cleanedText = responseText.replace(/^\uFEFF/, '').trim();
+                        data = JSON.parse(cleanedText);
+                    }
+                    
+                    console.log('API响应数据:', data);
+                    
+                    if (data.code === 200 && data.token) {
+                        window.open(`${redirectUrl}?token=${data.token}`, '_blank');
+                    } else {
+                        showToast('API请求失败，请检查返回数据！');
+                        console.log('API响应状态:', data.code, 'Token:', data.token);
+                    }
+                } catch (error) {
+                    showToast('请求失败，请稍后重试');
+                    console.error('API请求错误:', error);
+                } finally {
+                    btn.classList.remove('loading');
+                    btn.disabled = false;
+                }
+            }
 
-  <section>
-    <div class="down">
-      <div class="wrap">
-        <h2>立即开始使用</h2>
-        <p>加入官方 Q 群获取以最新版软件和更新推送，开启你的游戏汉化之旅！</p>
-        <div class="dlinks">
-          <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=A7gsx82J65hfJQMUXt%2FZom6pZ4W17bdkT6SGG9K%2FlkfaTHaszW%2BjIhUbLPkvmegj&busi_data=eyJncm91cENvZGUiOiIxMDQ4MDEzMzk0IiwidG9rZW4iOiIyMGtpb3FvQk0xZkpxYVBzcVRzRVErWWlUQUU1VDVrWDQ0Z3FKdXVQZUl5Z1FOZEp4MEsrb3FaOFE2dnd0YjNuIiwidWluIjoiODU3ODIxMDgwIn0%3D&data=fNM7PBCrQ4c_RDILs4yYmkkceGITVlSG4RI0rCC5HuUcgY6vaD0_YqU6PlWRJz9k0boGmziCqpQe3Q4vlz4z2g&svctype=4&tempid=h5_group_info" target="_blank" class="btn" rel="noopener noreferrer"><i class="fas fa-download"></i> 加入Q群＆下载KGT</a>
-          <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=A7gsx82J65hfJQMUXt%2FZom6pZ4W17bdkT6SGG9K%2FlkfaTHaszW%2BjIhUbLPkvmegj&busi_data=eyJncm91cENvZGUiOiIxMDQ4MDEzMzk0IiwidG9rZW4iOiIyMGtpb3FvQk0xZkpxYVBzcVRzRVErWWlUQUU1VDVrWDQ0Z3FKdXVQZUl5Z1FOZEp4MEsrb3FaOFE2dnd0YjNuIiwidWluIjoiODU3ODIxMDgwIn0%3D&data=fNM7PBCrQ4c_RDILs4yYmkkceGITVlSG4RI0rCC5HuUcgY6vaD0_YqU6PlWRJz9k0boGmziCqpQe3Q4vlz4z2g&svctype=4&tempid=h5_group_info" target="_blank" class="btn btn-outline" rel="noopener noreferrer"><i class="fas fa-users"></i> 仅加入 Q 群</a>
-        </div>
-      </div>
-    </div>
-  </section>
+            shoumenBtn.addEventListener('click', function() {
+                handleButtonClick(
+                    'https://r.aocu.xyz/api.php?id=kI5W1IZW7VNMbzs3',
+                    'https://r.aocu.xyz/index.php',
+                    this
+                );
+            });
 
-  <footer>
-    <div class="wrap">
-      <p>Kai GameTrans (KGT) &copy; 2025 | 由 <a href="https://space.bilibili.com/667716368" target="_blank" rel="noopener noreferrer">凯凯76579</a> 开发</p>
-      <p>软件如果使用异常可尝试管理员权限运行并关闭杀毒软件</p>
-    </div>
-  </footer>
-
-  <div id="top" aria-label="回到顶部"><i class="fas fa-chevron-up"></i></div>
-
-  <script>
-  /* ========= 滚动动画 ========= */
-  const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('visible')),{threshold:.15});
-  document.querySelectorAll('.hero,.tit,.card,.hl,.vid,.down,footer').forEach(el=>io.observe(el));
-  /* ========= 回到顶部 ========= */
-  const topBtn=document.getElementById('top');
-  window.addEventListener('scroll',()=>window.scrollY>300?topBtn.classList.add('visible'):topBtn.classList.remove('visible'));
-  topBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-  /* ========= 按钮涟漪 ========= */
-  document.querySelectorAll('.btn').forEach(b=>b.addEventListener('click',function(e){
-    const x=e.offsetX,y=e.offsetY,ripple=document.createElement('span');
-    ripple.style.cssText=`position:absolute;border-radius:50%;background:rgba(255,255,255,.4);width:0;height:0;top:${y}px;left:${x}px;pointer-events:none;transform:translate(-50%,-50%);animation:rip .6s ease-out`;
-    this.appendChild(ripple);
-    setTimeout(()=>ripple.remove(),600);
-  }));
-  /* ========= 离线 SW ========= */
-  if('serviceWorker' in navigator){
-    const sw='data:text/javascript,addEventListener("install",e=>e.waitUntil(skipWaiting()));addEventListener("activate",e=>e.waitUntil(clients.claim()));addEventListener("fetch",e=>e.respondWith(fetch(e.request).catch(()=>new Response("Offline"))));';
-    navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'})));
-  }
-  </script>
-  <style>
-  @keyframes rip{to{width:200px;height:200px;opacity:0}}
-  </style>
+            exlBtn.addEventListener('click', function() {
+                handleButtonClick(
+                    'https://vn.aocu.xyz/api.php?id=8uxr2unetvz5te4ndo',
+                    'https://vn.aocu.xyz/index.php',
+                    this
+                );
+            });
+        });
+    </script>
 </body>
 </html>
