@@ -4,407 +4,240 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>兽门酒馆共享号</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
+            /* Material Design 3 Color Tokens (Light Theme example) */
             --md-sys-color-primary: #6750A4;
             --md-sys-color-on-primary: #FFFFFF;
             --md-sys-color-primary-container: #EADDFF;
             --md-sys-color-on-primary-container: #21005D;
             --md-sys-color-secondary: #625B71;
             --md-sys-color-on-secondary: #FFFFFF;
-            --md-sys-color-secondary-container: #E8DEF8;
-            --md-sys-color-on-secondary-container: #1D192B;
-            --md-sys-color-tertiary: #7D5260;
-            --md-sys-color-on-tertiary: #FFFFFF;
-            --md-sys-color-tertiary-container: #FFD8E4;
-            --md-sys-color-on-tertiary-container: #31111D;
-            --md-sys-color-surface: #FEF7FF;
-            --md-sys-color-on-surface: #1D1B20;
+            --md-sys-color-background: #FFFBFE;
+            --md-sys-color-on-background: #1C1B1F;
+            --md-sys-color-surface: #FFFBFE;
+            --md-sys-color-on-surface: #1C1B1F;
             --md-sys-color-surface-variant: #E7E0EC;
             --md-sys-color-on-surface-variant: #49454F;
             --md-sys-color-outline: #79747E;
-            --md-sys-color-outline-variant: #CAC4D0;
-            --md-sys-color-shadow: #000000;
-            --md-sys-color-scrim: #000000;
-            --md-sys-color-inverse-surface: #322F35;
-            --md-sys-color-inverse-on-surface: #F4EFF4;
-            --md-sys-color-inverse-primary: #D0BCFF;
-            --md-sys-color-surface-dim: #DDD8E1;
-            --md-sys-color-surface-bright: #FEF7FF;
-            --md-sys-color-surface-container-lowest: #FFFFFF;
-            --md-sys-color-surface-container-low: #F7F2FA;
-            --md-sys-color-surface-container: #F1ECF4;
-            --md-sys-color-surface-container-high: #ECE6F0;
-            --md-sys-color-surface-container-highest: #E6E0E9;
-            --md-sys-elevation-level1: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-            --md-sys-elevation-level2: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
-            --md-sys-elevation-level3: 0px 1px 3px 0px rgba(0, 0, 0, 0.3), 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
-            --md-sys-elevation-level4: 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 6px 10px 4px rgba(0, 0, 0, 0.15);
-            --md-sys-elevation-level5: 0px 4px 4px 0px rgba(0, 0, 0, 0.3), 0px 8px 12px 6px rgba(0, 0, 0, 0.15);
-            --md-sys-shape-corner-none: 0px;
-            --md-sys-shape-corner-extra-small: 4px;
-            --md-sys-shape-corner-small: 8px;
-            --md-sys-shape-corner-medium: 12px;
-            --md-sys-shape-corner-large: 16px;
-            --md-sys-shape-corner-extra-large: 28px;
-            --md-sys-state-disabled: 0.38;
-            --md-sys-state-hover: 0.08;
-            --md-sys-state-focus: 0.12;
-            --md-sys-state-pressed: 0.12;
-            --md-sys-state-dragged: 0.16;
-            --md-sys-motion-easing-emphasized: cubic-bezier(0.2, 0.0, 0.0, 1.0);
-            --md-sys-motion-easing-standard: cubic-bezier(0.2, 0.0, 0.0, 1.0);
-            --md-sys-motion-easing-standard-decelerate: cubic-bezier(0.0, 0.0, 0.0, 1.0);
-            --md-sys-motion-easing-standard-accelerate: cubic-bezier(0.3, 0.0, 1.0, 1.0);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            
+            /* Elevation */
+            --md-sys-elevation-level-1: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-2: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
         }
 
         body {
-            font-family: 'Noto Sans SC', sans-serif;
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            color: #333;
-            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--md-sys-color-background);
+            color: var(--md-sys-color-on-background);
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            line-height: 1.5;
-            overflow: hidden;
-            position: relative;
-        }
-
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 80%, rgba(255, 182, 193, 0.4), transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(173, 216, 230, 0.4), transparent 50%),
-                        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.3), transparent 60%);
-            z-index: -1;
-        }
-
-        body::after {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
-            animation: moveBackground 20s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes moveBackground {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(20px, 20px); }
+            min-height: 100vh;
         }
 
         .container {
-            width: 100%;
-            max-width: 500px;
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            border: 1px solid rgba(255, 255, 255, 0.18);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 32px;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            gap: 24px;
+            padding: 24px;
+            max-width: 600px;
+            width: 100%;
         }
 
         h1 {
-            font-size: 32px;
-            font-weight: 700;
-            color: #444;
+            font-size: 2rem; /* Display Small/Medium */
+            font-weight: 400;
+            margin: 0;
+            color: var(--md-sys-color-on-background);
             text-align: center;
-            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
-            margin-bottom: 10px;
-            position: relative;
-            display: inline-block;
         }
 
-        h1::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
-            border-radius: 2px;
-        }
-
-        .buttons-container {
+        .card {
+            background-color: var(--md-sys-color-surface);
+            border-radius: 28px; /* MD3 Card Radius */
+            padding: 32px;
             display: flex;
             flex-direction: column;
             gap: 16px;
             width: 100%;
+            box-sizing: border-box;
+            /* Using a subtle outline or shadow for separation */
+            border: 1px solid var(--md-sys-color-outline);
+            /* Or elevation */
+            /* box-shadow: var(--md-sys-elevation-level-1); */ 
         }
 
-        .md-button {
-            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 16px 32px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
-            box-shadow: 0 4px 15px 0 rgba(116, 235, 213, 0.3);
-            position: relative;
-            overflow: hidden;
-            min-height: 50px;
+        /* MD3 Filled Button Style */
+        .md3-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transform: translateY(0);
-        }
-
-        .md-button:hover {
-            box-shadow: 0 8px 25px 0 rgba(116, 235, 213, 0.4);
-            transform: translateY(-3px);
-        }
-
-        .md-button:active {
-            box-shadow: 0 4px 15px 0 rgba(31, 38, 135, 0.2);
-            transform: translateY(0);
-        }
-
-        .md-button:focus {
-            outline: none;
-        }
-
-        .md-button::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .md-button:hover::before {
-            left: 100%;
-        }
-
-        .md-button::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.5);
-            opacity: 0;
-            border-radius: 100%;
-            transform: scale(1, 1) translate(-50%);
-            transform-origin: 50% 50%;
-        }
-
-        .md-button:focus:not(:active)::after {
-            animation: ripple 1s ease-out;
-        }
-
-        .md-button.secondary {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-        }
-
-        .md-button.secondary:hover {
-            box-shadow: 0 8px 25px 0 rgba(252, 182, 159, 0.4);
-        }
-
-        @keyframes ripple {
-            0% {
-                transform: scale(0, 0);
-                opacity: 0.5;
-            }
-            20% {
-                transform: scale(25, 25);
-                opacity: 0.3;
-            }
-            100% {
-                opacity: 0;
-                transform: scale(40, 40);
-            }
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            color: white;
-            padding: 16px 24px;
-            border-radius: 50px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.2, 0, 0, 1);
-            z-index: 1000;
-            max-width: 80%;
-            text-align: center;
+            height: 40px;
+            border-radius: 20px;
+            padding: 0 24px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.875rem;
             font-weight: 500;
-        }
-
-        .toast.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .loading {
+            letter-spacing: 0.1px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s, box-shadow 0.2s;
+            text-transform: none; /* MD3 doesn't enforce uppercase */
+            width: 100%;
             position: relative;
-            color: transparent;
+            overflow: hidden;
         }
 
-        .loading::after {
+        .md3-btn.primary {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+        }
+
+        .md3-btn.primary:hover {
+            background-color: rgba(103, 80, 164, 0.92); /* Slightly lighter/darker */
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        }
+
+        .md3-btn.primary:active {
+            background-color: rgba(103, 80, 164, 0.88);
+        }
+
+        /* Secondary / Tonal Button Style for variety, or use same style */
+        .md3-btn.secondary {
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+        }
+
+        .md3-btn.secondary:hover {
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Ripple effect */
+        .md3-btn::after {
             content: "";
             position: absolute;
-            width: 24px;
-            height: 24px;
             top: 50%;
             left: 50%;
-            margin-left: -12px;
-            margin-top: -12px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
-            border-top-color: white;
-            animation: spin 0.8s linear infinite;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+        }
+        
+        .md3-btn:active::after {
+            width: 200px;
+            height: 200px;
+        }
+
+        .md3-btn:disabled {
+            background-color: rgba(28, 27, 31, 0.12);
+            color: rgba(28, 27, 31, 0.38);
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top: 2px solid #fff;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
+            display: none;
+            margin-left: 8px;
+        }
+        
+        .secondary .spinner {
+            border-color: rgba(33, 0, 93, 0.3);
+            border-top-color: #21005D;
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        @media (max-width: 480px) {
-            .container {
-                padding: 24px;
-            }
-            
-            h1 {
-                font-size: 28px;
-            }
+        .btn-content {
+            display: flex;
+            align-items: center;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>兽门酒馆共享号</h1>
-        <div class="buttons-container">
-            <button id="shoumen-btn" class="md-button">兽门酒馆（共享号）</button>
-            <button id="exl-btn" class="md-button secondary">EXL酒馆（共享号）</button>
+        <div class="card">
+            <button id="btn-shoumen" class="md3-btn primary">
+                <span class="btn-content">兽门酒馆（共享号）</span>
+                <div class="spinner"></div>
+            </button>
+            <button id="btn-exl" class="md3-btn secondary">
+                <span class="btn-content">EXL酒馆（共享号）</span>
+                <div class="spinner"></div>
+            </button>
         </div>
     </div>
-    <div id="toast" class="toast"></div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const toast = document.getElementById('toast');
-            const shoumenBtn = document.getElementById('shoumen-btn');
-            const exlBtn = document.getElementById('exl-btn');
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnShoumen = document.getElementById('btn-shoumen');
+            const btnExl = document.getElementById('btn-exl');
 
-            function showToast(message, duration = 3000) {
-                toast.textContent = message;
-                toast.classList.add('show');
+            async function handleRequest(btn, url, redirectBase) {
+                const originalText = btn.querySelector('.btn-content').innerText;
+                const spinner = btn.querySelector('.spinner');
                 
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, duration);
-            }
-
-            async function handleButtonClick(apiUrl, redirectUrl, btn) {
-                if (btn.classList.contains('loading')) {
-                    return;
-                }
-                
-                btn.classList.add('loading');
+                // Set loading state
                 btn.disabled = true;
-                
+                spinner.style.display = 'block';
+
                 try {
-                    // 使用本地代理服务器
-                    const proxyUrl = `/proxy/${apiUrl}`;
-                    console.log('请求代理URL:', proxyUrl);
-                    
-                    const response = await fetch(proxyUrl);
-                    const responseText = await response.text();
-                    
-                    // 处理可能的非标准JSON格式
-                    let data;
-                    try {
-                        // 尝试直接解析JSON
-                        data = JSON.parse(responseText);
-                    } catch (e) {
-                        // 如果失败，尝试处理可能的格式问题
-                        // 移除可能的BOM或其他字符
-                        const cleanedText = responseText.replace(/^\uFEFF/, '').trim();
-                        data = JSON.parse(cleanedText);
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
                     }
-                    
-                    console.log('API响应数据:', data);
+                    const data = await response.json();
                     
                     if (data.code === 200 && data.token) {
-                        window.open(`${redirectUrl}?token=${data.token}`, '_blank');
+                        // Success
+                        window.open(redirectBase + data.token, '_blank');
                     } else {
-                        showToast('API请求失败，请检查返回数据！');
-                        console.log('API响应状态:', data.code, 'Token:', data.token);
+                        // Logic failure
+                        alert('兽门酒馆API请求失败！');
                     }
                 } catch (error) {
-                    showToast('请求失败，请稍后重试');
-                    console.error('API请求错误:', error);
+                    console.error('Error:', error);
+                    alert('兽门酒馆API请求失败！');
                 } finally {
-                    btn.classList.remove('loading');
+                    // Reset state
                     btn.disabled = false;
+                    spinner.style.display = 'none';
                 }
             }
 
-            shoumenBtn.addEventListener('click', function() {
-                handleButtonClick(
-                    'https://r.aocu.xyz/api.php?id=kI5W1IZW7VNMbzs3',
-                    'https://r.aocu.xyz/index.php',
-                    this
+            btnShoumen.addEventListener('click', () => {
+                handleRequest(
+                    btnShoumen, 
+                    'https://r.aocu.xyz/api.php?id=kI5W1IZW7VNMbzs3', 
+                    'https://r.aocu.xyz/index.php?token='
                 );
             });
 
-            exlBtn.addEventListener('click', function() {
-                handleButtonClick(
-                    'https://vn.aocu.xyz/api.php?id=8uxr2unetvz5te4ndo',
-                    'https://vn.aocu.xyz/index.php',
-                    this
+            btnExl.addEventListener('click', () => {
+                handleRequest(
+                    btnExl, 
+                    'https://vn.aocu.xyz/api.php?id=8uxr2unetvz5te4ndo', 
+                    'https://vn.aocu.xyz/index.php?token='
                 );
             });
         });
